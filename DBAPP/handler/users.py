@@ -1,4 +1,4 @@
-from flask import jsonify,request
+from flask import jsonify
 from dao.user import UserDAO
 class UserHandler:
     #Maps a UserDAO to a dictionary
