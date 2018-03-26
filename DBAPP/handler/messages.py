@@ -2,6 +2,8 @@ from dao.message import MessageDAO
 from flask import jsonify
 
 class MessageHandler:
+
+    # Maps a MessageDAO to a dictionary
     def mapToDict(self,row):
         result = {}
         result['mid'] = row[0]
@@ -11,7 +13,9 @@ class MessageHandler:
         result['mrepliedmid'] = row[4]
         return result
 
-        
+
+    ##### Handlers #####
+
     def getAllMessages(self):
          dao = MessageDAO()
          result = dao.getAllMessages()
@@ -20,24 +24,19 @@ class MessageHandler:
             mapped_result.append(self.mapToDict(r))
          return jsonify(Message = mapped_result)
 
-    def getMessageById(self,mid):
+    def getMessageByID(self, mid):
         dao = MessageDAO()
-        result = dao.getMessageById(mid)
+        result = dao.getMessageByID(mid)
         if result == None:
             return jsonify(Error="Not Found"), 404
         return jsonify(Message=self.mapToDict(result))    
-   
-    
-    def getAllMessagesByUId(self,uid):
+
+    def getAllMessagesByUser(self, uid):
         dao = MessageDAO()
-        result = dao.getAllMessagesByUId(uid)
+        result = dao.getAllMessagesByUser(uid)
         mapped_result = []
         if len(result) == 0:
             return jsonify(Error="Not Found"), 404
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return  jsonify(Messages = mapped_result)
-
-
-
-    

@@ -1,4 +1,5 @@
 class MessageDAO:
+
     def __init__(self):
         M1 = [120,541,'How are you?#Hello#NewYear','2018-01-08 04:05:06',0]
         M2 = [121,542,'Good, thanks for asking, hope your doing well.#DoingGood#NewYear','2018-01-08 04:07:06',120]
@@ -13,23 +14,15 @@ class MessageDAO:
     def getAllMessages(self):
         return self.data
     
-    def getMessageById(self,mid):
+    def getMessageByID(self, mid):
         for m in self.data:
             if m[0] == mid:
                 return m
         return None
     
-    def getAllMessagesByUId(self,uid):
+    def getAllMessagesByUser(self, uid):
         result = []
         for m in self.data:
             if m[1] == uid:
                 result.append(m)
-        return result  
-        
-    
-    
-
-
-
-        
-
+        return result

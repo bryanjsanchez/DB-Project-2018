@@ -1,6 +1,8 @@
 from flask import jsonify
 from dao.user import UserDAO
+
 class UserHandler:
+
     #Maps a UserDAO to a dictionary
     def mapToDict(self,row):
         result = {}
@@ -13,9 +15,10 @@ class UserHandler:
         result['password'] = row[6]#Not sure if password should be displayed.
         result['isActive'] = row[7]
         return result
+
     def mapContactsToDict(self,id):
         dao = UserDAO()
-        contacts = dao.getContactsById(id)
+        contacts = dao.getContactsByID(id)
         if contacts:
             mapped_contacts = {}
             for c in contacts:
@@ -23,8 +26,10 @@ class UserHandler:
             return mapped_contacts
         else:
             return None
-        
-        
+
+
+    ##### Handlers #####
+
     def getAllUsers(self):
         dao = UserDAO()
         result = dao.getAllUsers()
@@ -33,18 +38,17 @@ class UserHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(User=mapped_result)
         
-    def getUserById(self,id):
+    def getUserByID(self,id):
         dao = UserDAO()
-        result = dao.getUserById(id)
+        result = dao.getUserByID(id)
         if result == None:
             return jsonify(Error="Not Found"), 404
         else:
             return jsonify(User=self.mapToDict(result))
-    def getContactsById(self,id):
+
+    def getAllContactsByID(self, id):
         result = self.mapContactsToDict(id)
         if result == None:
             return jsonify(Error="Not Found"), 404
         else:
             return jsonify(Contacts=result)
-    
-        

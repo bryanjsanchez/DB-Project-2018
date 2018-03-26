@@ -1,4 +1,5 @@
 class HashtagDAO:
+
     def __init__(self):
         H1 = [101, 'Hello', 120]
         H2 = [102, 'NewYear', 120]
@@ -19,22 +20,16 @@ class HashtagDAO:
     def getAllHashtags(self):
         return self.data
 
-    def getHashtagsByText(self, text):
+    def getAllHashtagsByText(self, text):
         hashtags = []
         for h in self.data:
             if h[1] == text:
                 hashtags.append(h)
         return hashtags
 
-    def getHashtagByMessageID(self, messageid):
+    def getAllHashtagsByMessage(self, messageid):
         hashtags = []
         for h in self.data:
             if h[2] == messageid:
                 hashtags.append(h)
         return hashtags
-
-
-    
-    
-            
-        
