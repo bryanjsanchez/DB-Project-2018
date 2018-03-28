@@ -1,6 +1,7 @@
 from handler.users import UserHandler
 from handler.messages import MessageHandler
 from handler.hashtags import HashtagHandler
+from handler.chat import chatHandler
 from flask import Flask
 
 app = Flask(__name__)
@@ -58,6 +59,25 @@ def getAllHashtagsByMessage(hid):
 @app.route('/ChatApp/hashtags/text=<text>')
 def getAllHashtagsByText(text):
     return HashtagHandler().getAllHashtagsByText(text)
+
+### Routes For Chats ####
+
+@app.route('/ChatApp/Chats')
+def getAllChats():
+    return chatHandler().getAllChats()
+
+@app.route('/ChatApp/Chats/cid=<int:cid>')
+def getChatbyID(cid):
+    return chatHandler().getChatByID(cid)
+
+@app.route('/ChatApp/Chats/User/user=<int:uid>')
+def getChatbyUser(uid):
+    return chatHandler().getChatByUser(uid)
+
+@app.route('/ChatApp/Chats/Names/name=<name>')
+def getChatbyName(name):
+    return chatHandler().getChatByName(name)
+
 
 
 if __name__ == '__main__':
