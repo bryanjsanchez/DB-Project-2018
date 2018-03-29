@@ -1,7 +1,7 @@
 from flask import jsonify, request
-from dao.chat import chatDAO
+from dao.chat import ChatDAO
 
-class chatHandler:
+class ChatHandler:
 
     def mapToDict(self, row):
         result = {}
@@ -11,7 +11,7 @@ class chatHandler:
         return result
 
     def getAllChats(self):
-        dao = chatDAO()
+        dao = ChatDAO()
         result = dao.getAllChats()
         mapped_result = []
         for r in result:
@@ -19,7 +19,7 @@ class chatHandler:
         return jsonify(Chat=mapped_result)
 
     def getChatByName(self, text):
-        dao = chatDAO()
+        dao = ChatDAO()
         result = dao.getChatByNames(text)
         print(result)
         mapped_result = []
@@ -31,9 +31,8 @@ class chatHandler:
             mapped_result = self.mapToDict(result)
         return jsonify(Chat=mapped_result)
 
-
     def getChatByUser(self, uid):
-        dao = chatDAO()
+        dao = ChatDAO()
         result = dao.getChatByUser(uid)
         mapped_result = []
         if result is None:
@@ -43,7 +42,7 @@ class chatHandler:
         return jsonify(Hashtag=mapped_result)
 
     def getChatByID(self, cid):
-        dao = chatDAO()
+        dao = ChatDAO()
         result = dao.getChatByID(cid)
         mapped_result = []
         print('Getting Chat')

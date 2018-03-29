@@ -22,14 +22,11 @@ class HashtagDAO:
                 return h
         return None
 
-    def getAllHashtagsByText(self, text):
-        hashtags = []
+    def getHashtagByText(self, text):
         for h in self.data:
             if h[1] == text:
-                hashtags.append(h)
-        if not hashtags:
-            return None
-        return hashtags
+                return h
+        return None
 
     def getTop10Hashtags(self):
         self.data.sort(key=lambda x:x[2], reverse=True)

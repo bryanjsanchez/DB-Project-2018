@@ -22,24 +22,25 @@ class HashtagHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Hashtag=mapped_result)
 
-    def getAllHashtagsByText(self, text):
+    def getHashtagByID(self, text):
         dao = HashtagDAO()
-        result = dao.getAllHashtagsByText(text)
-        mapped_result = []
+        result = dao.getHashtagByID(text)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        for r in result:
-            mapped_result.append(self.mapToDict(r))
-        else:
-            return jsonify(Hashtag=mapped_result)
+        return jsonify(Hashtag=result)
 
-    def getAllHashtagsByMessage(self, messageid):
+    def getHashtagByText(self, hid):
         dao = HashtagDAO()
-        result = dao.getAllHashtagsByMessage(messageid)
-        mapped_result = []
+        result = dao.getHashtagByText(hid)
         if result == None:
             return jsonify(Error="Not Found"), 404
+        return jsonify(Hashtag=result)
+
+    def getTop10Hashtags(self):
+        dao = HashtagDAO()
+        result = dao.getTop10Hashtags()
+        mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
-        else:
-            return jsonify(Hashtag=mapped_result)
+        return jsonify(Hashtag=mapped_result)
+

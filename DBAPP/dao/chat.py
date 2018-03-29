@@ -1,5 +1,4 @@
-class chatDAO:
-
+class ChatDAO:
 
     def __init__(self):
          #ChatID, UserID, ChatName
