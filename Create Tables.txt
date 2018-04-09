@@ -10,8 +10,8 @@
 );
 CREATE TABLE Contact (
          cid BIGSERIAL PRIMARY KEY,
-        ccontact BIGINT NOT NULL REFERENCES Users(uid),
-        ccontactee BIGINT NOT NULL REFERENCES Users(uid)
+        uid BIGINT NOT NULL REFERENCES Users(uid),
+        ccontact BIGINT NOT NULL REFERENCES Users(uid)
 );
 CREATE TABLE ChatGroup (
          cgid BIGSERIAL PRIMARY KEY,
@@ -19,22 +19,22 @@ CREATE TABLE ChatGroup (
 );
 CREATE TABLE ChatMember (
         cmid BIGSERIAL PRIMARY KEY,
-        cmuserid BIGINT  REFERENCES Users(uid),
-        cmchatid BIGINT  REFERENCES ChatGroup(cgid),
+        uid BIGINT  REFERENCES Users(uid),
+        cgid BIGINT  REFERENCES ChatGroup(cgid),
         cmisowner BOOLEAN NOT NULL
 );
  CREATE TABLE Message (
          mid BIGSERIAL PRIMARY KEY,
-        mchatid BIGINT  REFERENCES ChatGroup(cgid),
-        mauthorid BIGINT REFERENCES Users(uid),
+        cgid BIGINT  REFERENCES ChatGroup(cgid),
+        uid BIGINT REFERENCES Users(uid),
         mtext TEXT NOT NULL,
         mtimestamp TIMESTAMP NOT NULL,
         mrepliedmid BIGINT
 );
 CREATE TABLE MessageReaction (
         mrid BIGSERIAL PRIMARY KEY,
-        mruserid BIGINT NOT NULL REFERENCES Users(uid),
-        mrmessageid BIGINT NOT NULL REFERENCES Message(mid),
+        uid BIGINT NOT NULL REFERENCES Users(uid),
+        mid BIGINT NOT NULL REFERENCES Message(mid),
         mrlike BOOLEAN NOT NULL
 );
 CREATE TABLE Hashtag (
@@ -44,6 +44,6 @@ CREATE TABLE Hashtag (
 );
 CREATE TABLE MessageHashtag (
         mhid BIGSERIAL PRIMARY KEY,
-mhmessageid BIGINT NOT NULL REFERENCES Message(mid),
-mhhashtagid BIGINT NOT NULL REFERENCES Hashtag(hid)
+        mid BIGINT NOT NULL REFERENCES Message(mid),
+        hid BIGINT NOT NULL REFERENCES Hashtag(hid)
 );
