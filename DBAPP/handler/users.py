@@ -41,10 +41,10 @@ class UserHandler:
     def getUserByID(self,id):
         dao = UserDAO()
         result = dao.getUserByID(id)
-        if result == None:
+        if not result:
             return jsonify(Error="Not Found"), 404
         else:
-            return jsonify(User=self.mapToDict(result))
+            return jsonify(User=result)
 
     def getAllContactsByID(self, id):
         result = self.mapContactsToDict(id)
