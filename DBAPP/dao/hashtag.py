@@ -8,7 +8,8 @@ class HashtagDAO:
                                                             pg_config['user'],
                                                             pg_config['host'],
                                                             pg_config['password'])
-        self.conn = psycopg2._connect(connection_url);
+        self.conn = psycopg2._connect(connection_url)
+        self.data = []
 
         #########Data from phase 1#######
         #                               #
@@ -28,10 +29,10 @@ class HashtagDAO:
     def getAllHashtags(self):
         cursor = self.conn.cursor()
         query = "select * from hashtag;"
-        cursor.execute(query);
+        cursor.execute(query)
         result = []
         for row in cursor:
-            result.append(row);
+            result.append(row)
         return result
 
     def getHashtagByID(self, hid):
