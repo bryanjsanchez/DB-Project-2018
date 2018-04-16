@@ -30,7 +30,7 @@ class UserDAO:
         result = []
         for  row in cursor:
             result.append(row)
-        return result        
+        return result       
 
     #Returns a collection of users composing a contact list.
     def getContactsByID(self, id):

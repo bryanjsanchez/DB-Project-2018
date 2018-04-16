@@ -29,7 +29,7 @@ class MessageHandler:
         result = dao.getMessageByID(mid)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        return jsonify(Message=self.mapToDict(result))    
+        return jsonify(Message=result)    
 
     def getAllMessagesByUser(self, uid):
         dao = MessageDAO()
