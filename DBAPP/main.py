@@ -57,7 +57,7 @@ def getAllHashtags():
 def getHashtagByID(hid):
     return HashtagHandler().getHashtagByID(hid)
 
-@app.route('/ChatApp/hashtags/text=<text>')
+@app.route('/ChatApp/hashtag/text=<text>')
 def getAllHashtagsByText(text):
     return HashtagHandler().getHashtagByText(text)
 
