@@ -5,48 +5,53 @@ class ChatHandler:
 
     def mapToDict(self, row):
         result = {}
-        result['cid'] = row[0]
-        result['uid'] = row[1]
-        result['cname'] = row[2]
+        result['cgid'] = row[0]
+        result['cgname'] = row[1]
         return result
 
-    def getAllChats(self):
+    def mapUserMsgsToDict(self,row):
+        result = {}
+        result['cgname'] = row[0]
+        result['mtext'] = row[3]
+
+    def getAllChatGroups(self):
         dao = ChatDAO()
-        result = dao.getAllChats()
+        result = dao.getAllChatGroups()
         mapped_result = []
+        if not result:
+            return jsonify(Error="Not Found"), 404
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Chat=mapped_result)
 
-    def getChatByName(self, text):
+    def getChatGroupsByUserId(self,uid):
         dao = ChatDAO()
-        result = dao.getChatByNames(text)
-        print(result)
+        result = dao.getChatGroupsByUserId(uid)
         mapped_result = []
-        if result is None:
-            return jsonify(Error="Not Found"), 404
-        # for r in result:
-        #     mapped_result.append(self.mapToDict(r))
-        else:
-            mapped_result = self.mapToDict(result)
-        return jsonify(Chat=mapped_result)
-
-    def getChatByUser(self, uid):
-        dao = ChatDAO()
-        result = dao.getChatByUser(uid)
-        mapped_result = []
-        if result is None:
-            return jsonify(Error="Not Found"), 404
+        if not result:
+            return jsonify(Error="Not Found"), 404        
         for r in result:
             mapped_result.append(self.mapToDict(r))
-        return jsonify(Hashtag=mapped_result)
+        return jsonify(ChatGroups=mapped_result)
+        
 
-    def getChatByID(self, cid):
+
+    
+    def getChatMsgsByUserId(self,cgid, uid):
         dao = ChatDAO()
-        result = dao.getChatByID(cid)
+        result = dao.getChatMsgsByUserId(cgid,uid)
         mapped_result = []
-        print('Getting Chat')
-        if result is None:
+        if not result:
+            return jsonify(Error="Not Found"), 404
+        for r in result:
+            mapped_result.append(self.mapUserMsgsToDict(r))
+        return jsonify(Messages=mapped_result)
+
+    def getChatByID(self, cgid):
+        dao = ChatDAO()
+        result = dao.getChatByID(cgid)
+        mapped_result = []
+        if not result:
             return jsonify(Error="Not Found"), 404
         for r in result:
             mapped_result.append(self.mapToDict(r))

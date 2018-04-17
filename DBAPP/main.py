@@ -69,19 +69,20 @@ def getTop10Hashtags():
 
 @app.route('/ChatApp/chats')
 def getAllChats():
-    return ChatHandler().getAllChats()
+    return ChatHandler().getAllChatGroups()
 
-@app.route('/ChatApp/chat=<int:cid>')
-def getChatbyID(cid):
-    return ChatHandler().getChatByID(cid)
+@app.route('/ChatApp/chat/<int:cgid>')
+def getChatbyID(cgid):
+    return ChatHandler().getChatByID(cgid)
 
-@app.route('/ChatApp/chats/user=<int:uid>')
+@app.route('/ChatApp/chats/user/<int:uid>')
 def getChatbyUser(uid):
-    return ChatHandler().getChatByUser(uid)
+    return ChatHandler().getChatGroupsByUserId(uid)
 
-@app.route('/ChatApp/chats/name=<name>')
-def getChatbyName(name):
-    return ChatHandler().getChatByName(name)
+@app.route('/ChatApp/chats/<int:cgid>/user/<int:uid>/messages')
+def getChatbyName(cgid,uid):
+    return ChatHandler().getChatMsgsByUserId(cgid,uid)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -13,34 +13,25 @@ class ChatDAO:
         self.conn = psycopg2._connect(connection_url)
         
 
-    def getAllChats(self):
+    def getAllChatGroups(self):
         cursor = self.conn.cursor()
         query = "select * from chatgroup"
-        cursor.exexute(query)
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
-
-    def getChatByNames(self, text):
-        cursor = self.conn.cursor()
-        query  = "select * from chatgroup " \
-                 " where cgname = {};".format(text)
-        cursor.exexute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result   
-        
+       
 
     def getChatMsgsByUserId(self,cgid,uid):
         cursor = self.conn.cursor()
+        #NOTE: There is a bug with this query in python.
         query = "select cgname,ufirstname,ulastname,mtext " \
-                "from (chatgroup natural inner join chatmember "\
+                "from (chatgroup natural inner join chatmember) "\
                 "natural inner join (users natural inner join message) "\
                 "where cgid = {}"\
                 "and uid = {}".format(cgid,uid)
-        cursor.exexute(query)
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
@@ -50,9 +41,21 @@ class ChatDAO:
         cursor = self.conn.cursor()
         query = "select * from chatgroup " \
                 "where cgid = {};".format(cgid)
-        cursor.exexute(query)
+        cursor.execute(query)
         result = []
         for row in cursor:
            result.append(row)
 
+        return result
+
+    def getChatGroupsByUserId(self,uid):
+        cursor = self.conn.cursor()
+        query = "select cgid,cgname   " \
+                "from (users natural inner join chatmember) "\
+                "natural join chatgroup "\
+                "where uid = {}".format(uid)
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
