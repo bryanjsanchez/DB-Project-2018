@@ -1,41 +1,58 @@
+from config.dbconfig import pg_config
+import psycopg2
 class ChatDAO:
 
     def __init__(self):
-         #ChatID, UserID, ChatName
-        C1 = [556, 541, 'MemesandSlander']
-        C2 = [556, 542, 'MemesandSlander']
-        C3 = [762, 542, 'NormiesChat']
-        C4 = [762, 543, 'NormiesChat']
-        self.data = []
-        self.data.append(C1)
-        self.data.append(C2)
-        self.data.append(C3)
-        self.data.append(C4)
+        connection_url = "dbname={} user={} host={} password={}".format(
+            pg_config['dbname'],
+            pg_config['user'],
+            pg_config['host'],
+            pg_config['password']
+        )
+
+        self.conn = psycopg2._connect(connection_url)
+        
 
     def getAllChats(self):
-        results = []
-        for m in self.data:
-            if m[2] not in self.data:
-                results.append(m)
-        return results
+        cursor = self.conn.cursor()
+        query = "select * from chatgroup"
+        cursor.exexute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getChatByNames(self, text):
-        for m in self.data:
-            if m[2] == text:
-                return m
-        return None
+        cursor = self.conn.cursor()
+        query  = "select * from chatgroup " \
+                 " where cgname = {};".format(text)
+        cursor.exexute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result   
+        
 
-    def getChatByUser(self, User):
-        results = []
-        for m in self.data:
-            if m[1] == User:
-                results.append(m)
-        return results
+    def getChatMsgsByUserId(self,cgid,uid):
+        cursor = self.conn.cursor()
+        query = "select cgname,ufirstname,ulastname,mtext " \
+                "from (chatgroup natural inner join chatmember "\
+                "natural inner join (users natural inner join message) "\
+                "where cgid = {}"\
+                "and uid = {}".format(cgid,uid)
+        cursor.exexute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
-    def getChatByID(self, ID):
-        results = []
-        for m in self.data:
-            print(m[0])
-            if m[0] == ID:
-                results.append(m)
-        return results
+    def getChatByID(self, cgid):
+        cursor = self.conn.cursor()
+        query = "select * from chatgroup " \
+                "where cgid = {};".format(cgid)
+        cursor.exexute(query)
+        result = []
+        for row in cursor:
+           result.append(row)
+
+        return result
