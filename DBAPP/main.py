@@ -38,7 +38,7 @@ def getAllContactsByID(uid):
 def getAllMessages():
     return MessageHandler().getAllMessages()
 
-@app.route('/ChatApp/message/<int:mid>')
+@app.route('/ChatApp/messages/<int:mid>')
 def getMessageByID(mid):
     return MessageHandler().getMessageByID(mid)
 

@@ -12,6 +12,14 @@ class MessageHandler:
         result['mtimestamp'] = row[3]
         result['mrepliedmid'] = row[4]
         return result
+    def mapUserMsgToDict(self,row):
+        result = {}
+        result['ufirstname'] = row[0]
+        result['ulastname'] = row[1]
+        result['mtext'] = row[2]
+        result['mtimestamp'] = row[3]
+        result['mrepliedmid'] = row[4]
+        return result
 
 
     ##### Handlers #####
@@ -38,5 +46,5 @@ class MessageHandler:
         if len(result) == 0:
             return jsonify(Error="Not Found"), 404
         for r in result:
-            mapped_result.append(self.mapToDict(r))
+            mapped_result.append(self.mapUserMsgToDict(r))
         return  jsonify(Messages = mapped_result)

@@ -35,5 +35,12 @@ class MessageDAO:
         
     
     def getAllMessagesByUser(self, uid):
-        result = []
-        #need to implement this method.
+        cursor = self.conn.cursor()
+        query = "select ufirstname,ulastname,mtext,mtimestamp,mrepliedmid " \
+                "from users natural inner join message "\
+                "where uid = {};".format(uid)
+        cursor.execute(query)
+        result = [] 
+        for row in cursor:
+            result.append(row)
+        return result
