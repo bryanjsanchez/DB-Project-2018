@@ -33,9 +33,15 @@ class UserDAO:
         return result       
 
     #Returns a collection of users composing a contact list.
-    def getContactsByID(self, id):
+    def getContactsByID(self, uid):
         cursor = self.conn.cursor()
-        query  = ""
+        query  = "select ufirstname,ulastname " \
+                 "from users as U inner join contact as C on "\
+                 "(U.uid = C.uid) "\
+                 "where C.ccontact = {};".format(uid)
+        cursor.execute(query)
         result = []
-        #Still need to get the query for this operation
+        for row in cursor:
+            result.append(row)        
+            
         return result

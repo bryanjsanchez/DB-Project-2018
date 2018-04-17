@@ -12,7 +12,7 @@ app = Flask(__name__)
 def hello():
     return "Hello"
 
-@app.route('/login/')
+@app.route('/ChatApp/login/')
 def log():
     return "No logging!"
 
@@ -23,11 +23,11 @@ def log():
 def getAllUsers():
     return UserHandler().getAllUsers()
         
-@app.route('/ChatApp/user=<int:uid>')
+@app.route('/ChatApp/user/<int:uid>')
 def getUserByID(uid):
     return UserHandler().getUserByID(uid)
 
-@app.route('/ChatApp/user=<int:uid>/contacts')
+@app.route('/ChatApp/user/<int:uid>/contacts')
 def getAllContactsByID(uid):
     return UserHandler().getAllContactsByID(uid)
 
@@ -38,11 +38,11 @@ def getAllContactsByID(uid):
 def getAllMessages():
     return MessageHandler().getAllMessages()
 
-@app.route('/ChatApp/message=<int:mid>')
+@app.route('/ChatApp/message/<int:mid>')
 def getMessageByID(mid):
     return MessageHandler().getMessageByID(mid)
 
-@app.route('/ChatApp/messages/user=<int:uid>')
+@app.route('/ChatApp/messages/user/<int:uid>')
 def getAllMessagesByUser(uid):
     return MessageHandler().getAllMessagesByUser(uid)
 
