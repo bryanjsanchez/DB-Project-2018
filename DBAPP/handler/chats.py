@@ -13,6 +13,7 @@ class ChatHandler:
         result = {}
         result['cgname'] = row[0]
         result['mtext'] = row[3]
+        return result
 
     def getAllChatGroups(self):
         dao = ChatDAO()
