@@ -12,21 +12,6 @@ class HashtagDAO:
         )
 
         self.conn = psycopg2._connect(connection_url)
-
-        #########Data from phase 1#######
-        #                               #
-        # H1 = [101, 'Hello', 1]        #
-        # H2 = [102, 'NewYear', 2]      #
-        # H3 = [103, 'DoingGood', 1]    #
-        # H4 = [104, 'LetsParty', 1]    #
-        # H5 = [105, 'YOLO', 2]         #
-        # self.data = []                #
-        # self.data.append(H1)          #
-        # self.data.append(H2)          #
-        # self.data.append(H3)          #
-        # self.data.append(H4)          #
-        # self.data.append(H5)          #
-        #################################
     
     def getAllHashtags(self):
         cursor = self.conn.cursor()

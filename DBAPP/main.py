@@ -46,6 +46,22 @@ def getMessageByID(mid):
 def getAllMessagesByUser(uid):
     return MessageHandler().getAllMessagesByUser(uid)
 
+@app.route('/ChatApp/messages/<int:mid>/likes')
+def getAllMessageLikesByMID(mid):
+    return MessageHandler().getAllMessageLikesByMID(mid)
+
+@app.route('/ChatApp/messages/<int:mid>/likes/number')
+def getNumberOfLikesByMID(mid):
+    return MessageHandler().getNumberOfLikesByMID(mid)
+
+@app.route('/ChatApp/messages/<int:mid>/dislikes')
+def getAllMessageDislikesByMID(mid):
+    return MessageHandler().getAllMessageDislikesByMID(mid)
+
+@app.route('/ChatApp/messages/<int:mid>/dislikes/number')
+def getNumberOfDislikesByMID(mid):
+    return MessageHandler().getNumberOfDislikesByMID(mid)
+
 
 ##### Routes for Hashtags #####
 

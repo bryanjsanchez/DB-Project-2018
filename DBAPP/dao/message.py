@@ -44,3 +44,43 @@ class MessageDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getAllMessageLikesByMID(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from messagereaction " \
+                "where mid = {}" \
+                "and mrlike = true".format(mid)
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getNumberOfLikesByMID(self, mid):
+        cursor = self.conn.cursor()
+        query = "select count(*) from messagereaction " \
+                "where mid = {}" \
+                "and mrlike = true".format(mid)
+        cursor.execute(query)
+        result = cursor.fetchone()
+        return result[0]
+
+    def getAllMessageDislikesByMID(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from messagereaction " \
+                "where mid = {}" \
+                "and mrlike = false".format(mid)
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getNumberOfDislikesByMID(self, mid):
+        cursor = self.conn.cursor()
+        query = "select count(*) from messagereaction " \
+                "where mid = {}" \
+                "and mrlike = false".format(mid)
+        cursor.execute(query)
+        result = cursor.fetchone()
+        return result[0]
