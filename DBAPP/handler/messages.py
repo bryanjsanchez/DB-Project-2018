@@ -29,7 +29,6 @@ class MessageHandler:
         result['mrlike'] = row[2]
         return result
 
-
     ##### Handlers #####
 
     def getAllMessages(self):

@@ -99,6 +99,10 @@ def getChatbyID(cgid):
 def getChatbyUser(uid):
     return ChatHandler().getChatGroupsByUserId(uid)
 
+@app.route('/ChatApp/chat/<int:cgid>/messages')
+def getAllMessagesByChat(cgid):
+    return ChatHandler().getAllMessagesByChat(cgid)
+
 @app.route('/ChatApp/chats/<int:cgid>/user/<int:uid>/messages')
 def getChatbyName(cgid,uid):
     return ChatHandler().getChatMsgsByUserId(cgid,uid)

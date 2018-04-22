@@ -32,7 +32,6 @@ class MessageDAO:
         for row in cursor:
             result.append(row)
         return result
-        
     
     def getAllMessagesByUser(self, uid):
         cursor = self.conn.cursor()

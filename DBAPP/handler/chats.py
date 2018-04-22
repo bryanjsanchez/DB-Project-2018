@@ -15,6 +15,18 @@ class ChatHandler:
         result['mtext'] = row[3]
         return result
 
+    def mapChatMessageToDict(self, row):
+        result = {}
+        result['ChatName'] = row[0]
+        result['mid'] = row[1]
+        result['uid'] = row[2]
+        result['text'] = row[3]
+        result['date'] = row[4]
+        result['time'] = row[5]
+        result['likes'] = row[6]
+        result['dislikes'] = row[7]
+        return result
+
     def getAllChatGroups(self):
         dao = ChatDAO()
         result = dao.getAllChatGroups()
@@ -34,9 +46,16 @@ class ChatHandler:
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return jsonify(ChatGroups=mapped_result)
-        
 
-
+    def getAllMessagesByChat(self, cgid):
+        dao = ChatDAO()
+        result = dao.getAllMessagesByChat(cgid)
+        mapped_result = []
+        if len(result) == 0:
+            return jsonify(Error="Not Found"), 404
+        for r in result:
+            mapped_result.append(self.mapChatMessageToDict(r))
+        return jsonify(Messages=mapped_result)
     
     def getChatMsgsByUserId(self,cgid, uid):
         dao = ChatDAO()

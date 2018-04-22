@@ -44,7 +44,30 @@ class ChatDAO:
         result = []
         for row in cursor:
            result.append(row)
+        return result
 
+    def getAllMessagesByChat(self, cgid):
+        cursor = self.conn.cursor()
+        query = "SELECT " \
+                "chatgroup.cgname," \
+                "message.mid," \
+                "message.uid AS User," \
+                "message.mtext AS Text," \
+                "to_char(message.mtimestamp, 'DD MON YYYY') as Date," \
+                "to_char(message.mtimestamp, 'HH:MI AM') as Time," \
+                "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS Likes," \
+                "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS Dislikes " \
+                "FROM message " \
+                "LEFT JOIN messagereaction " \
+                "USING(mid) " \
+                "NATURAL INNER JOIN chatgroup " \
+                "WHERE message.cgid = %s " \
+                "GROUP BY message.cgid, message.mid, chatgroup.cgname " \
+                "ORDER BY message.mtimestamp;"
+        cursor.execute(query, (cgid,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getChatGroupsByUserId(self,uid):
