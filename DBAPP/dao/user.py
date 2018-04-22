@@ -25,12 +25,21 @@ class UserDAO:
     def getUserByID(self, uid):
         cursor = self.conn.cursor()
         query = "select * from users " \
-                "where uid = {};".format(uid)
-        cursor.execute(query)
+                "where uid = %s;"
+        cursor.execute(query,(uid,))
         result = []
         for  row in cursor:
             result.append(row)
-        return result       
+        return result  
+
+    def getUserByUserName(self,username):
+        cursor = self.conn.cursor()
+        query = "select * from users where uusername = %s"
+        cursor.execute(query,(username,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result     
 
     #Returns a collection of users composing a contact list.
     def getContactsByID(self, uid):
@@ -38,8 +47,8 @@ class UserDAO:
         query  = "select ufirstname,ulastname " \
                  "from users as U inner join contact as C on "\
                  "(U.uid = C.uid) "\
-                 "where C.ccontact = {};".format(uid)
-        cursor.execute(query)
+                 "where C.ccontact = %s;"
+        cursor.execute(query,(uid,))
         result = []
         for row in cursor:
             result.append(row)        

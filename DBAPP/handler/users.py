@@ -44,9 +44,17 @@ class UserHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(User=mapped_result)
         
-    def getUserByID(self,id):
+    def getUserByID(self,uid):
         dao = UserDAO()
-        result = dao.getUserByID(id)
+        result = dao.getUserByID(uid)
+        if not result:
+            return jsonify(Error="Not Found"), 404
+        else:
+            return jsonify(User=result)
+    
+    def getUserByUserName(self,username):
+        dao = UserDAO()
+        result = dao.getUserByUserName(username)
         if not result:
             return jsonify(Error="Not Found"), 404
         else:

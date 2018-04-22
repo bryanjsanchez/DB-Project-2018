@@ -25,13 +25,12 @@ class ChatDAO:
 
     def getChatMsgsByUserId(self,cgid,uid):
         cursor = self.conn.cursor()
-        #NOTE: There is a bug with this query in python.
         query = "select cgname,ufirstname,ulastname,mtext " \
                 "from (chatgroup natural inner join chatmember) "\
                 "natural inner join (users natural inner join message) "\
-                "where cgid = {}"\
-                "and uid = {}".format(cgid,uid)
-        cursor.execute(query)
+                "where cgid = %s"\
+                "and uid = %s"
+        cursor.execute(query,(cgid,uid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -40,8 +39,8 @@ class ChatDAO:
     def getChatByID(self, cgid):
         cursor = self.conn.cursor()
         query = "select * from chatgroup " \
-                "where cgid = {};".format(cgid)
-        cursor.execute(query)
+                "where cgid = %s;"
+        cursor.execute(query,(cgid,))
         result = []
         for row in cursor:
            result.append(row)
@@ -53,8 +52,8 @@ class ChatDAO:
         query = "select cgid,cgname   " \
                 "from (users natural inner join chatmember) "\
                 "natural join chatgroup "\
-                "where uid = {}".format(uid)
-        cursor.execute(query)
+                "where uid = %s"
+        cursor.execute(query,(uid,))
         result = []
         for row in cursor:
             result.append(row)

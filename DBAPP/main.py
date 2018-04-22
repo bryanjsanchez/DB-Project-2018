@@ -27,6 +27,10 @@ def getAllUsers():
 def getUserByID(uid):
     return UserHandler().getUserByID(uid)
 
+@app.route('/ChatApp/user/<username>')
+def getUserByUserName(username):
+    return UserHandler().getUserByUserName(username)
+
 @app.route('/ChatApp/user/<int:uid>/contacts')
 def getAllContactsByID(uid):
     return UserHandler().getAllContactsByID(uid)
@@ -69,11 +73,11 @@ def getNumberOfDislikesByMID(mid):
 def getAllHashtags():
     return HashtagHandler().getAllHashtags()
 
-@app.route('/ChatApp/hashtag=<int:hid>')
+@app.route('/ChatApp/hashtag/<int:hid>')
 def getHashtagByID(hid):
     return HashtagHandler().getHashtagByID(hid)
 
-@app.route('/ChatApp/hashtag/text=<text>')
+@app.route('/ChatApp/hashtag/<text>')
 def getAllHashtagsByText(text):
     return HashtagHandler().getHashtagByText(text)
 
