@@ -73,7 +73,7 @@ def getNumberOfDislikesByMID(mid):
 def getAllHashtags():
     return HashtagHandler().getAllHashtags()
 
-@app.route('/ChatApp/hashtag/<int:hid>')
+@app.route('/ChatApp/hashtag/ <int:hid>')
 def getHashtagByID(hid):
     return HashtagHandler().getHashtagByID(hid)
 

@@ -24,9 +24,8 @@ class MessageHandler:
 
     def mapMsgReactionToDict(self,row):
         result = {}
-        result['uid'] = row[0]
-        result['mid'] = row[1]
-        result['mrlike'] = row[2]
+        result['mrlike'] = row[0]
+        result['uusername'] = row[1]
         return result
 
     ##### Handlers #####

@@ -37,8 +37,8 @@ class MessageDAO:
         cursor = self.conn.cursor()
         query = "select ufirstname,ulastname,mtext,mtimestamp,mrepliedmid " \
                 "from users natural inner join message "\
-                "where uid = {};".format(uid)
-        cursor.execute(query)
+                "where uid = %s;"
+        cursor.execute(query,(uid,))
         result = [] 
         for row in cursor:
             result.append(row)
@@ -46,10 +46,10 @@ class MessageDAO:
 
     def getAllMessageLikesByMID(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from messagereaction " \
-                "where mid = {}" \
-                "and mrlike = true".format(mid)
-        cursor.execute(query)
+        query = "select mrlike,uusername from messagereaction natural inner join users " \
+                "where mid = %s" \
+                "and mrlike = true"
+        cursor.execute(query,(mid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -58,18 +58,18 @@ class MessageDAO:
     def getNumberOfLikesByMID(self, mid):
         cursor = self.conn.cursor()
         query = "select count(*) from messagereaction " \
-                "where mid = {}" \
-                "and mrlike = true".format(mid)
-        cursor.execute(query)
+                "where mid = %s" \
+                "and mrlike = true"
+        cursor.execute(query,(mid,))
         result = cursor.fetchone()
         return result[0]
 
     def getAllMessageDislikesByMID(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from messagereaction " \
-                "where mid = {}" \
-                "and mrlike = false".format(mid)
-        cursor.execute(query)
+        query = "select mrlike,uusername from messagereaction natural inner join users " \
+                "where mid = %s" \
+                "and mrlike = false"
+        cursor.execute(query,(mid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -78,8 +78,8 @@ class MessageDAO:
     def getNumberOfDislikesByMID(self, mid):
         cursor = self.conn.cursor()
         query = "select count(*) from messagereaction " \
-                "where mid = {}" \
-                "and mrlike = false".format(mid)
-        cursor.execute(query)
+                "where mid = %s" \
+                "and mrlike = false"
+        cursor.execute(query,(mid,))
         result = cursor.fetchone()
         return result[0]
