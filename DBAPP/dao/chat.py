@@ -81,3 +81,24 @@ class ChatDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getChatOwner(self, cgid):
+        cursor = self.conn.cursor()
+        query = "select U.uid, U.uusername, CG.cgname "\
+                "from Users as U, chatgroup as CG, ownschat as o "\
+                "where o.uid = U.uid and o.cgid = CG.cgid and CG.cgid = %s"
+        cursor.execute(query,(cgid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getChatUsers(self, cgid):
+        cursor = self.conn.cursor()
+        query = "SELECT U.uid, U.uusername, CG.cgname from Users as U, chatmember as CH, chatgroup as CG "\
+                "where U.uid = CH.uid and CH.cgid = CG.cgid and CG.cgid = %s"
+        cursor.execute(query, (cgid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
