@@ -17,14 +17,17 @@ class ChatHandler:
 
     def mapChatMessageToDict(self, row):
         result = {}
-        result['ChatName'] = row[0]
+        result['chatname'] = row[0]
         result['mid'] = row[1]
-        result['uid'] = row[2]
-        result['text'] = row[3]
-        result['date'] = row[4]
-        result['time'] = row[5]
-        result['likes'] = row[6]
-        result['dislikes'] = row[7]
+        result['firstname'] = row[2]
+        result['lastname'] = row[3]
+        result['username'] = row[4]
+        result['uid'] = row[5]
+        result['text'] = row[6]
+        result['date'] = row[7]
+        result['time'] = row[8]
+        result['likes'] = row[9]
+        result['dislikes'] = row[10]
         return result
 
     def mapOwnersToDict(self, row):

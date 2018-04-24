@@ -8,11 +8,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadMessages = function(){
             // Get the messages from the server through the rest api
-            thisCtrl.messageList.push({"id": 1, "text": "Hola Mi Amigo", "author" : "Bob",
-            "like" : 4, "nolike" : 1});
-            thisCtrl.messageList.push({"id": 2, "text": "Hello World", "author": "Joe",
-                "like" : 11, "nolike" : 12});
-
+            $http.get('http://127.0.0.1:5000/ChatApp/chat/1/messages').then(function(response) {
+                thisCtrl.messageList = response.data.Messages;
+            });
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
@@ -26,4 +24,4 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.loadMessages();
-}]);
+    }]);

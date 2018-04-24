@@ -49,20 +49,25 @@ class ChatDAO:
     def getAllMessagesByChat(self, cgid):
         cursor = self.conn.cursor()
         query = "SELECT " \
-                "chatgroup.cgname," \
+                "chatgroup.cgname AS chatname," \
                 "message.mid," \
-                "message.uid AS User," \
-                "message.mtext AS Text," \
-                "to_char(message.mtimestamp, 'DD MON YYYY') as Date," \
-                "to_char(message.mtimestamp, 'HH:MI AM') as Time," \
-                "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS Likes," \
-                "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS Dislikes " \
+                "users.ufirstname AS firstname, " \
+                "users.ulastname AS lastname, " \
+                "users.uusername AS username, " \
+                "message.uid," \
+                "message.mtext AS text," \
+                "to_char(message.mtimestamp, 'DD MON YYYY') as date," \
+                "to_char(message.mtimestamp, 'HH:MI AM') as time," \
+                "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS likes," \
+                "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS dislikes " \
                 "FROM message " \
                 "LEFT JOIN messagereaction " \
                 "USING(mid) " \
                 "NATURAL INNER JOIN chatgroup " \
+                "INNER JOIN users " \
+                "ON users.uid=message.uid " \
                 "WHERE message.cgid = %s " \
-                "GROUP BY message.cgid, message.mid, chatgroup.cgname " \
+                "GROUP BY message.cgid, message.mid, chatname, firstname, lastname, username " \
                 "ORDER BY message.mtimestamp;"
         cursor.execute(query, (cgid,))
         result = []
