@@ -103,9 +103,19 @@ def getChatbyUser(uid):
 def getAllMessagesByChat(cgid):
     return ChatHandler().getAllMessagesByChat(cgid)
 
+@app.route('/ChatApp/chat/<int:cgid>/owner')
+def getChatOwner(cgid):
+    return ChatHandler().getChatOwner(cgid)
+
 @app.route('/ChatApp/chats/<int:cgid>/user/<int:uid>/messages')
 def getChatbyName(cgid,uid):
     return ChatHandler().getChatMsgsByUserId(cgid,uid)
+
+@app.route('/ChatApp/chat/<int:cgid>/members')
+def getChatMemvers(cgid):
+    return ChatHandler().getChatMembers(cgid)
+
+
 
 
 if __name__ == '__main__':
