@@ -15,7 +15,8 @@ class ChatDAO:
 
     def getAllChatGroups(self):
         cursor = self.conn.cursor()
-        query = "select * from chatgroup"
+        query = "select U.uusername as Owner , CG.cgname, CG.cgid from users as U, chatgroup as CG, ownschat as O "\
+                "where CG.cgid = O.cgid and O.uid = U.uid"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -38,8 +39,8 @@ class ChatDAO:
 
     def getChatByID(self, cgid):
         cursor = self.conn.cursor()
-        query = "select * from chatgroup " \
-                "where cgid = %s;"
+        query = "select U.uusername as Owner , CG.cgname, CG.cgid from users as U, chatgroup as CG, ownschat as O " \
+                "where CG.cgid = O.cgid and O.uid = U.uid and CG.cgid = %s;"
         cursor.execute(query,(cgid,))
         result = []
         for row in cursor:
@@ -60,15 +61,14 @@ class ChatDAO:
                 "to_char(message.mtimestamp, 'HH:MI AM') as time," \
                 "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS likes," \
                 "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS dislikes " \
-                "FROM message " \
-                "LEFT JOIN messagereaction " \
-                "USING(mid) " \
-                "NATURAL INNER JOIN chatgroup " \
-                "INNER JOIN users " \
-                "ON users.uid=message.uid " \
+                "FROM message, " \
+                "messagereaction, "\
+                "chatgroup," \
+                ",users " \
                 "WHERE message.cgid = %s " \
                 "GROUP BY message.cgid, message.mid, chatname, firstname, lastname, username " \
                 "ORDER BY message.mtimestamp;"
+        cursor.execute(query, (cgid,))
         cursor.execute(query, (cgid,))
         result = []
         for row in cursor:
@@ -107,5 +107,3 @@ class ChatDAO:
         for row in cursor:
             result.append(row)
         return result
-    
-    
