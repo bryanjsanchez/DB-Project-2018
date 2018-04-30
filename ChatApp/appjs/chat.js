@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope',
-    function($http, $log, $scope) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope','$location',
+    function($http, $log, $scope,$location) {
         var thisCtrl = this;
 
         this.messageList = [];
@@ -10,7 +10,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             // Get the messages from the server through the rest api
             $http.get('http://127.0.0.1:5000/ChatApp/chat/1/messages').then(function(response) {
                 thisCtrl.messageList = response.data.Messages;
-                counter = thisCtrl.messageList.size()
+                counter = thisCtrl.messageList.length;
             });
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
@@ -23,6 +23,15 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             thisCtrl.messageList.unshift({"id": nextId, "text" : msg, "username" : author, "likes" : 0, "dislikes" : 0});
             thisCtrl.newText = "";
         };
+
+        this.messageLikeUsers= function (mid) {
+            $location.url('/message/' + mid+ "/likes");
+        };
+
+        this.messageDislikeUsers= function (mid) {
+            $location.url('/message/' + mid+ "/dislikes");
+        };
+
 
         this.loadMessages();
     }]);

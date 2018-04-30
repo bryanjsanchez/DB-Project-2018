@@ -78,8 +78,34 @@ class MessageDAO:
     def getNumberOfDislikesByMID(self, mid):
         cursor = self.conn.cursor()
         query = "select count(*) from messagereaction " \
-                "where mid = %s" \
+                "where mid = %s " \
                 "and mrlike = false"
         cursor.execute(query,(mid,))
         result = cursor.fetchone()
         return result[0]
+
+    def getUsersThatLikedMessageByMID(self,mid):
+        cursor = self.conn.cursor()
+        query = "select uusername " \
+                "from users natural inner join messagereaction "\
+                "where mid = %s "\
+                "and mrlike = true"
+        cursor.execute(query,(mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+    
+    def getUsersThatDislikedMessageByMID(self,mid):
+        cursor = self.conn.cursor()
+        query = "select uusername " \
+                "from users natural inner join messagereaction "\
+                "where mid = %s "\
+                "and mrlike = false"
+        cursor.execute(query,(mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+        
+        

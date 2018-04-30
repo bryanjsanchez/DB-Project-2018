@@ -21,6 +21,11 @@ class MessageHandler:
         result['mtimestamp'] = row[3]
         result['mrepliedmid'] = row[4]
         return result
+    
+    def mapUserToDict(self,row):
+        result = {}
+        result['uusername'] = row[0]
+        return result
 
     def mapMsgReactionToDict(self,row):
         result = {}
@@ -74,7 +79,7 @@ class MessageHandler:
         dao = MessageDAO()
         result = dao.getAllMessageDislikesByMID(mid)
         mapped_result = []
-        if len(result) == 0:
+        if not result:
             return jsonify(Error="Not Found"), 404
         for r in result:
             mapped_result.append(self.mapMsgReactionToDict(r))
@@ -84,3 +89,26 @@ class MessageHandler:
         dao = MessageDAO()
         result = dao.getNumberOfDislikesByMID(mid)
         return jsonify(NumberOfDislikes=result)
+    
+    def getUsersThatLikedMessageByMID(self,mid):
+        dao = MessageDAO()
+        result = dao.getUsersThatLikedMessageByMID(mid)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="Not Found"), 404
+        for row in result:
+            mapped_result.append(self.mapUserToDict(row))
+        return jsonify(Users=mapped_result)
+
+    def getUsersThatDislikedMessageByMID(self,mid):
+        dao = MessageDAO()
+        result = dao.getUsersThatDislikedMessageByMID(mid)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="Not Found"), 404
+        for row in result:
+            mapped_result.append(self.mapUserToDict(row))
+        return jsonify(Users=mapped_result)
+
+
+    
