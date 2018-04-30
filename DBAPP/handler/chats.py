@@ -5,8 +5,9 @@ class ChatHandler:
 
     def mapToDict(self, row):
         result = {}
-        result['cgid'] = row[0]
+        result['Owner'] = row[0]
         result['cgname'] = row[1]
+        result['cgid'] = row[2]
         return result
 
     def mapUserMsgsToDict(self,row):
