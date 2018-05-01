@@ -68,6 +68,13 @@ def getAllMessageDislikesByMID(mid):
 def getNumberOfDislikesByMID(mid):
     return MessageHandler().getNumberOfDislikesByMID(mid)
 
+@app.route('/ChatApp/messages/<int:mid>/likes/users')
+def getUsersThatLikedMessagebyMID(mid):
+    return MessageHandler().getUsersThatLikedMessageByMID(mid)
+
+@app.route('/ChatApp/messages/<int:mid>/dislikes/users')
+def getUsersThatDislikedMessageByMID(mid):
+    return MessageHandler().getUsersThatDislikedMessageByMID(mid)
 
 ##### Routes for Hashtags #####
 

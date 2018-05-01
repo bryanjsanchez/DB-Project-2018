@@ -59,12 +59,14 @@ class ChatDAO:
                 "message.mtext AS text," \
                 "to_char(message.mtimestamp, 'DD MON YYYY') as date," \
                 "to_char(message.mtimestamp, 'HH:MI AM') as time," \
-                "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS likes," \
-                "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS dislikes " \
-                "FROM message, " \
-                "messagereaction, "\
-                "chatgroup," \
-                ",users " \
+                "COUNT(NULLIF(messagereaction.mrlike=false, true)) AS likes," \
+                "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS dislikes " \
+                "FROM message " \
+                "LEFT JOIN messagereaction " \
+                "USING(mid) "\
+                "NATURAL INNER JOIN chatgroup " \
+                "INNER JOIN users " \
+                "ON users.uid = message.uid " \
                 "WHERE message.cgid = %s " \
                 "GROUP BY message.cgid, message.mid, chatname, firstname, lastname, username " \
                 "ORDER BY message.mtimestamp;"
