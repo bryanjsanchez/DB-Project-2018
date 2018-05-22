@@ -10,7 +10,7 @@ class MessageDAO:
             pg_config['password']
         )
 
-        self.conn = psycopg2._connect(connection_url)
+        self.conn = psycopg2.connect(connection_url)
         
 
     def getAllMessages(self):

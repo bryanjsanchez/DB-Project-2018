@@ -10,7 +10,7 @@ class UserDAO:
             pg_config['password']
         )
 
-        self.conn = psycopg2._connect(connection_url)
+        self.conn = psycopg2.connect(connection_url)
 
     
     def getAllUsers(self):
@@ -44,7 +44,7 @@ class UserDAO:
     #Returns a collection of users composing a contact list.
     def getContactsByID(self, uid):
         cursor = self.conn.cursor()
-        query  = "select ufirstname,ulastname " \
+        query  = "select ufirstname, ulastname " \
                  "from users as U inner join contact as C on "\
                  "(U.uid = C.uid) "\
                  "where C.ccontact = %s;"

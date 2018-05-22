@@ -10,7 +10,7 @@ class ChatDAO:
             pg_config['password']
         )
 
-        self.conn = psycopg2._connect(connection_url)
+        self.conn = psycopg2.connect(connection_url)
         
 
     def getAllChatGroups(self):
@@ -115,5 +115,7 @@ class ChatDAO:
         query = "INSERT INTO chatgroup(cgname) VALUES (%s) RETURNING cgid;"
         cursor.execute(query, (chatname,))
         cgid = cursor.fetchone()[0]
+        query = "INSERT INTO ownschat(cgid, uid) VALUES (%s, 1);"
+        cursor.execute(query, (cgid,))
         self.conn.commit()
         return cgid
