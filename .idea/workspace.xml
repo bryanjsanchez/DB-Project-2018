@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d2913f48-b40e-4b04-bab8-45588b09cbb4" name="Default" comment="Add pages for new chat, add contact and join chat">
+      <change afterPath="$PROJECT_DIR$/../old-DB-Project-2018" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$" beforeDir="false" afterPath="$PROJECT_DIR$" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="addcontact.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/addcontact.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="48" selection-start-column="48" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addcontact.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/pages/addcontact.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="joinchat.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/pages/joinchat.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ChatApp/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="joinchat.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/joinchat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newchat.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/newchat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newchat.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/pages/newchat.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="9" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ChatApp/appjs/newcontact.js" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/newcontact.html" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/likes.html" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/dislikes.html" />
+        <option value="$PROJECT_DIR$/ChatApp/index.html" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/main.js" />
+        <option value="$PROJECT_DIR$/DBAPP/dao/chat.py" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/addcontact.js" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/newchat.html" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/newchat.js" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/chat.js" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/chat.html" />
+        <option value="$PROJECT_DIR$/DBAPP/main.py" />
+        <option value="$PROJECT_DIR$/DBAPP/handler/chats.py" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/addcontact.html" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/joinchat.js" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/joinchat.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="75" />
+    <option name="y" value="-4" />
+    <option name="width" value="1363" />
+    <option name="height" value="860" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DB-Project-2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DB-Project-2018" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DB-Project-2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DB-Project-2018" type="462c0819:PsiDirectoryNode" />
+              <item name="ChatApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DB-Project-2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DB-Project-2018" type="462c0819:PsiDirectoryNode" />
+              <item name="ChatApp" type="462c0819:PsiDirectoryNode" />
+              <item name="appjs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DB-Project-2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DB-Project-2018" type="462c0819:PsiDirectoryNode" />
+              <item name="ChatApp" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DB-Project-2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DB-Project-2018" type="462c0819:PsiDirectoryNode" />
+              <item name="DBAPP" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ChatApp/appjs" />
+      <recent name="$PROJECT_DIR$/ChatApp/pages" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DB-Project-2018" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DBAPP" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DBAPP/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d2913f48-b40e-4b04-bab8-45588b09cbb4" name="Default" comment="" />
+      <created>1525051705564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1525051705564</updated>
+      <workItem from="1526856341829" duration="4300000" />
+    </task>
+    <task id="LOCAL-00001" summary="Modify UI">
+      <created>1525144865915</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525144865915</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add pages for new chat, add contact and join chat">
+      <created>1526973157485</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1526973157485</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add pages for new chat, add contact and join chat">
+      <created>1526974012865</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1526974012865</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4300000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1375" height="904" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12727273" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28894472" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.20175439" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modify UI" />
+    <MESSAGE value="Add support for new chat, add contact and join chat" />
+    <MESSAGE value="Add pages for new chat, add contact and join chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add pages for new chat, add contact and join chat" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/newchat.js" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/chat.html" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/chat.js" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/main.js" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/likes.html" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/like.js" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/index.html" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/dislike.js" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/hashtag.py" />
+    <entry file="file://$PROJECT_DIR$/DBAPP/config/dbconfig.py" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/dislikes.html" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/likes.html" />
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/like.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-126">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/chat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="103" column="34" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/handler/chats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/newchat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/newchat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="9" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/addcontact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="48" selection-start-column="48" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/addcontact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/joinchat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/joinchat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

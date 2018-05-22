@@ -33,12 +33,12 @@
                             </p>
                         </div>
                         <div class="card-action">
-                            <button class="btn waves-effect waves-light green" type="submit" name="action" ng-click="m.likes = m.likes + 1"> <i class="material-icons">thumb_up
-                            </i></a> <span ng-bind= "m.likes">  </span> 
+                            <button class="btn waves-effect waves-light green" type="submit" name="action" ng-click="m.likes = m.likes + 1">
+                                <i class="material-icons">thumb_up</i> <span ng-bind= "m.likes">  </span>
                             </button>
                             <a class="waves-effect green lighten-1 btn-small" ng-click="chatCtrl.messageLikeUsers(m.mid)">Liked</a>
-                            <button class="btn waves-effect waves-light deep-orange" type="submit" name="action" ng-click="m.dislikes = m.dislikes+1"> <i class="material-icons">thumb_down
-                            </i></a> <span ng-bind= "m.dislikes">  </span> 
+                            <button class="btn waves-effect waves-light deep-orange" type="submit" name="action" ng-click="m.dislikes = m.dislikes+1">
+                                <i class="material-icons">thumb_down</i> <span ng-bind= "m.dislikes">  </span>
                             </button>
                             <a class="waves-effect deep-orange lighten-1 btn-small" ng-click="chatCtrl.messageDislikeUsers(m.mid)">Disliked</a>
                         </div>
@@ -46,5 +46,8 @@
                 </div>
             </div>
         </div>
+        <a class="btn-small" ng-click="chatCtrl.newChat()">New Chat</a>
+        <a class="btn-small" ng-click="chatCtrl.addContact()">Add Contact</a>
+        <a class="btn-small" ng-click="chatCtrl.joinChat()">Join Chat</a>
     </div>
 </div>

@@ -3,7 +3,7 @@ from handler.messages import MessageHandler
 from handler.hashtags import HashtagHandler
 from handler.chats import ChatHandler
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -96,9 +96,13 @@ def getTop10Hashtags():
 
 ### Routes For Chats ####
 
-@app.route('/ChatApp/chat')
+@app.route('/ChatApp/chat', methods=['GET', 'POST'])
 def getAllChats():
-    return ChatHandler().getAllChatGroups()
+    print(request)
+    if request.method == 'GET':
+        return ChatHandler().getAllChatGroups()
+    elif request.method == 'POST':
+        return ChatHandler().newChat(request.json)
 
 @app.route('/ChatApp/chat/<int:cgid>')
 def getChatbyID(cgid):

@@ -109,3 +109,11 @@ class ChatDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def newChat(self, chatname):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO chatgroup(cgname) VALUES (%s) RETURNING cgid;"
+        cursor.execute(query, (chatname,))
+        cgid = cursor.fetchone()[0]
+        self.conn.commit()
+        return cgid

@@ -45,6 +45,11 @@ class ChatHandler:
         result['cgname'] = row[2]
         return result
 
+    def buildChat(self, cgid, chatname):
+        result = {}
+        result['cgid'] = cgid
+        result['cgname'] = chatname
+        return result
 
     def getAllChatGroups(self):
         dao = ChatDAO()
@@ -116,4 +121,16 @@ class ChatHandler:
             mapped_result.append(self.mapMembersToDict(r))
         return jsonify(Members=mapped_result)
 
-
+    def newChat(self, form):
+        if len(form) != 1:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            print(form)
+            chatname = form['chatname']
+            if chatname:
+                dao = ChatDAO()
+                cgid = dao.newChat(chatname)
+                result = self.buildChat(cgid, chatname)
+                return jsonify(Chat=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400

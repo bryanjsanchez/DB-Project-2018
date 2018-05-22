@@ -19,6 +19,18 @@
             templateUrl: 'pages/dislikes.html',
             controller: 'DislikesController',
             controllerAs : 'dislikesCtrl'
+        }).when('/newchat',{
+            templateUrl: 'pages/newchat.html',
+            controller: 'NewChatController',
+            controllerAs : 'newChatCtrl'
+        }).when('/addcontact',{
+            templateUrl: 'pages/addcontact.html',
+            controller: 'AddContactController',
+            controllerAs : 'addContactCtrl'
+        }).when('/joinchat',{
+            templateUrl: 'pages/joinchat.html',
+            controller: 'JoinChatController',
+            controllerAs : 'joinChatCtrl'
         }).otherwise({
             redirectTo: '/chat'
         });

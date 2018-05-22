@@ -32,6 +32,17 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             $location.url('/message/' + mid+ "/dislikes");
         };
 
+        this.newChat= function (mid) {
+            $location.url('/newchat');
+        };
+
+        this.addContact= function (mid) {
+            $location.url('/addcontact');
+        };
+
+        this.joinChat= function (mid) {
+            $location.url('/joinchat');
+        };
 
         this.loadMessages();
     }]);
