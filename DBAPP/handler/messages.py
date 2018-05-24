@@ -12,6 +12,8 @@ class MessageHandler:
         result['mtimestamp'] = row[3]
         result['mrepliedmid'] = row[4]
         return result
+    
+
 
     def mapUserMsgToDict(self,row):
         result = {}
@@ -31,6 +33,16 @@ class MessageHandler:
         result = {}
         result['mrlike'] = row[0]
         result['uusername'] = row[1]
+        return result
+
+    def buildMessageAttributes(self,mid,uid,cgid,mtext,mtimestamp,mrepliedmid):
+        result = {}
+        result['mid'] = mid
+        result['uid'] = uid
+        result['cgid'] = cgid
+        result['mtext'] =mtext
+        result['mtimestamp'] = mtimestamp
+        result['mrepliedmid'] = mrepliedmid
         return result
 
     ##### Handlers #####
@@ -110,5 +122,21 @@ class MessageHandler:
             mapped_result.append(self.mapUserToDict(row))
         return jsonify(Users=mapped_result)
 
+
+    def insertMessageJson(self,json):
+        uid = json["uid"]
+        cgid = json["cgid"]
+        mtext = json["mtext"]
+        mtimestamp = json["mtimestamp"]
+        mrepliedmid = json["mrepliedmid"]
+        if uid and cgid and mtext and mtimestamp and mrepliedmid:
+            dao = MessageDAO()
+            mid = dao.insert(uid,cgid,mtext,mtimestamp,mrepliedmid)
+            result = self.buildMessageAttributes(mid,uid,cgid,mtext,mtimestamp,mrepliedmid)
+            return jsonify(Message=result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 400
+        
+        
 
     

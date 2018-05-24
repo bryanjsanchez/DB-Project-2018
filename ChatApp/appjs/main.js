@@ -19,6 +19,10 @@
             templateUrl: 'pages/dislikes.html',
             controller: 'DislikesController',
             controllerAs : 'dislikesCtrl'
+        }).when('/message/:mid/reply',{
+            templateUrl: 'pages/reply.html',
+            controller: 'ReplyController',
+            controllerAs : 'replyCtrl'
         }).when('/newchat',{
             templateUrl: 'pages/newchat.html',
             controller: 'NewChatController',

@@ -25,11 +25,14 @@ class MessageDAO:
     
     def getMessageByID(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from message " \
-                "where mid = {}".format(mid)
-        cursor.execute(query)
+        query = "select mid,uid as mauthor,mtext,mtimestamp,mrepliedmid "\
+                " from message " \
+                "where mid = %s"
+        cursor.execute(query,(mid,))
         result = []
+        
         for row in cursor:
+            print(row)
             result.append(row)
         return result
     
@@ -109,3 +112,11 @@ class MessageDAO:
         return result
         
         
+    def insert(self,uid,cgid,mtext,mtimestamp,mrepliedmid):
+        cursor = self.conn.cursor()
+        query = "insert into message(uid,cgid,mtext,mtimestamp,mrepliedmid) "\
+                "values (%s,%s,%s,%s,%s) returning mid;"
+        cursor.execute(query,(uid,cgid,mtext,mtimestamp,mrepliedmid,))
+        mid = cursor.fetchone()[0]
+        self.conn.commit()
+        return mid

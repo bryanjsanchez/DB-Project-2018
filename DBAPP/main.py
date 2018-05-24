@@ -3,7 +3,7 @@ from handler.messages import MessageHandler
 from handler.hashtags import HashtagHandler
 from handler.chats import ChatHandler
 
-from flask import Flask, request
+from flask import Flask, request,jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -40,9 +40,16 @@ def getAllContactsByID(uid):
 
 ##### Routes for Messages #####
 
-@app.route('/ChatApp/messages')
+@app.route('/ChatApp/messages', methods=['GET','POST'])
 def getAllMessages():
-    return MessageHandler().getAllMessages()
+    if request.method == 'POST':
+        print("Request: ", request.json)
+        return MessageHandler().insertMessageJson(request.json)
+
+
+    else:
+        if not request.args:
+            return MessageHandler().getAllMessages()
 
 @app.route('/ChatApp/messages/<int:mid>')
 def getMessageByID(mid):
