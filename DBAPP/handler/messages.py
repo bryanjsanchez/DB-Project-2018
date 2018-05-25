@@ -1,4 +1,5 @@
 from dao.message import MessageDAO
+from handler.hashtags import HashtagHandler
 from flask import jsonify
 
 class MessageHandler:
@@ -129,14 +130,22 @@ class MessageHandler:
         mtext = json["mtext"]
         mtimestamp = json["mtimestamp"]
         mrepliedmid = json["mrepliedmid"]
+       
+        
+    
         if uid and cgid and mtext and mtimestamp and mrepliedmid:
             dao = MessageDAO()
+            hHandler = HashtagHandler()            
             mid = dao.insert(uid,cgid,mtext,mtimestamp,mrepliedmid)
+            hashtagJSON = {}
+            hashtagJSON["mtext"] = mtext
+            hashtagJSON["mid"] = mid
+            hHandler.insertHashtagJson(hashtagJSON)
             result = self.buildMessageAttributes(mid,uid,cgid,mtext,mtimestamp,mrepliedmid)
             return jsonify(Message=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
         
-        
 
-    
+
+        

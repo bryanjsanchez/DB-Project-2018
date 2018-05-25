@@ -52,3 +52,18 @@ class HashtagDAO:
         for row in cursor:
             result.append(row)
         return result
+    
+    #Inserts a new hashtag
+    def insert(self,htext,mid):
+        cursor = self.conn.cursor()
+        query = "insert into hashtag (htext,hcount) "\
+                "values (%s,%s) returning hid;"
+        cursor.execute(query,(htext,1,))
+        hid = cursor.fetchone()[0]
+        self.conn.commit()
+        query = "insert into messagehashtag(mid,hid) "\
+                "values (%s,%s);"
+        cursor.execute(query,(mid,hid,))
+
+        self.conn.commit()
+        return hid
