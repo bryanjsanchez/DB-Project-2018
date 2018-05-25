@@ -31,7 +31,11 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             
             var nextId = thisCtrl.counter++;
             data.mrepliedmid = 0;
-            data.mtimestamp = "2018-01-08 04:05:06";
+            //data.mtimestamp = "2018-01-08 04:05:06";
+
+            var date = new Date();
+            var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
+            data.mtimestamp = d;
             
             //thisCtrl.messageList.unshift({"uid": nextId, "mtext" : msg, "uid" : uid, "mtimestamp" : mtimestamp, "mrepliedmid" : mrepliedmid});
             var reqURL = "http://localhost:5000/ChatApp/messages";

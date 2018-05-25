@@ -131,8 +131,8 @@ class MessageHandler:
         mtext = json["mtext"]
         mtimestamp = json["mtimestamp"]
         mrepliedmid = json["mrepliedmid"]
-        print(str(uid)+"\n"+str(cgid)+"\n"+mtext+"\n"+mtimestamp+"\n"+str(mrepliedmid)+"\n")
-        
+        #print(str(uid)+"\n"+str(cgid)+"\n"+mtext+"\n"+mtimestamp+"\n"+str(mrepliedmid)+"\n")
+        #print("\n\n" + json["timestamp"] + "\n\n")        
     
         if uid!=None and cgid!=None and mtext!=None and mtimestamp!=None and mrepliedmid!=None:
             dao = MessageDAO()
