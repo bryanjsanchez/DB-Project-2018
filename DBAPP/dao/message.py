@@ -15,7 +15,7 @@ class MessageDAO:
 
     def getAllMessages(self):
         cursor = self.conn.cursor()
-        query = "select * from message"
+        query = "select mid,uid,cgid,mtext,mtimestamp,mrepliedmid from message"
         cursor.execute(query)
         result = []
         for row in cursor:

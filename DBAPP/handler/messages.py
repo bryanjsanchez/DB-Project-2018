@@ -8,10 +8,11 @@ class MessageHandler:
     def mapToDict(self,row):
         result = {}
         result['mid'] = row[0]
-        result['mauthor'] = row[1]
-        result['mtext'] = row[2]
-        result['mtimestamp'] = row[3]
-        result['mrepliedmid'] = row[4]
+        result['uid'] = row[1]
+        result['cgid'] = row[2]
+        result['mtext'] = row[3]
+        result['mtimestamp'] = row[4]
+        result['mrepliedmid'] = row[5]
         return result
     
 
@@ -130,10 +131,10 @@ class MessageHandler:
         mtext = json["mtext"]
         mtimestamp = json["mtimestamp"]
         mrepliedmid = json["mrepliedmid"]
-       
+        print(str(uid)+"\n"+str(cgid)+"\n"+mtext+"\n"+mtimestamp+"\n"+str(mrepliedmid)+"\n")
         
     
-        if uid and cgid and mtext and mtimestamp and mrepliedmid:
+        if uid!=None and cgid!=None and mtext!=None and mtimestamp!=None and mrepliedmid!=None:
             dao = MessageDAO()
             hHandler = HashtagHandler()            
             mid = dao.insert(uid,cgid,mtext,mtimestamp,mrepliedmid)

@@ -64,7 +64,7 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
             data.uid = 1;
             data.mtimestamp = "2018-01-08 04:05:06";
             data.cgid = 1;
-            data.mrepliedmid = thisCtrl.messageData["mrepliedmid"];            
+            data.mrepliedmid = thisCtrl.messageData["mid"];            
             var author = "jocasio";
             data.mtext = "RE:"+"\""+oldMsg+"\""+msg;
 
