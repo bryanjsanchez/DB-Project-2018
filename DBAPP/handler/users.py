@@ -99,3 +99,8 @@ class UserHandler:
 
 
         return None
+    
+     def login(self, username, password):
+        dao = UserDAO()
+        result = dao.login(username, password)
+        return result
