@@ -59,8 +59,8 @@ angular.module('AppChat').controller('JoinChatController', ['$http', '$log', '$s
                 // Success function
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
-                    // assing the part details to the variable in the controller
-                    window.location = reqURL + "/" + response.data["Chat"]["cgid"]
+                    // Passing the part details to the variable in the controller
+                    $location.url('/chat/' + cgid);
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -90,8 +90,6 @@ angular.module('AppChat').controller('JoinChatController', ['$http', '$log', '$s
                     }
                 }
             );
-
-            $location.url('/chat/' + cgid);
         };
 
         this.loadChats();

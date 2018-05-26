@@ -15,7 +15,7 @@
             templateUrl: 'pages/homepage.html',
             controller: 'HPController',
             controllerAs : 'hpCtrl'
-        }).when('/chat:cgid', {
+        }).when('/chat/:cgid', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
