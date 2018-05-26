@@ -21,9 +21,14 @@ def log():
 
 ##### Routes for Users #####
 
-@app.route('/ChatApp/users')
+@app.route('/ChatApp/users', methods=['GET','POST'])
 def getAllUsers():
-    return UserHandler().getAllUsers()
+    if request.method == 'POST':
+        print("Request: ", request.json)
+        return UserHandler().insertUserJson(request.json)
+    else:
+        if not request.args:
+            return UserHandler().getAllUsers()
         
 @app.route('/ChatApp/user/<int:uid>')
 def getUserByID(uid):
@@ -45,8 +50,6 @@ def getAllMessages():
     if request.method == 'POST':
         print("Request: ", request.json)
         return MessageHandler().insertMessageJson(request.json)
-
-
     else:
         if not request.args:
             return MessageHandler().getAllMessages()

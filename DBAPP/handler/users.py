@@ -32,6 +32,18 @@ class UserHandler:
             return mapped_contacts
         else:
             return None
+    
+    def buildUserAttributes(self,uid,firstname,lastname,phone,email,username,password,isactive):
+        result = {}
+        result['uid'] = uid
+        result['firstname'] = firstname
+        result['lastname'] = lastname
+        result['phone'] = phone
+        result['email'] = email
+        result['username'] = username
+        result['password'] = password
+        result['isactive'] = isactive
+        return result
 
 
     ##### Handlers #####
@@ -42,7 +54,7 @@ class UserHandler:
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
-        return jsonify(User=mapped_result)
+        return jsonify(Users=mapped_result)
         
     def getUserByID(self,uid):
         dao = UserDAO()
@@ -66,3 +78,24 @@ class UserHandler:
             return jsonify(Error="Not Found"), 404
         else:
             return jsonify(Contacts=result)
+
+
+    def insertUserJson(self,json):
+        firstname = json["firstname"]
+        lastname = json["lastname"]
+        phone = json["phone"]
+        email = json["email"]
+        username = json["username"]
+        password = json["password"]
+        isactive = "true"
+
+        if firstname!=None and lastname!=None and phone!=None and email!=None and username!=None and password!=None and isactive!=None:
+            dao = UserDAO()
+            uid = dao.insert(firstname,lastname,phone,email,username,password,isactive)
+            result = self.buildUserAttributes(uid,firstname,lastname,phone,email,username,password,isactive)
+            return jsonify(User=result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+        return None

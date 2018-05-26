@@ -7,6 +7,10 @@
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
             controllerAs : 'logingCtrl'
+        }).when('/signup', {
+            templateUrl: 'pages/signup.html',
+            controller: 'SignUpController',
+            controllerAs : 'signupCtrl'
         }).when('/chat', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
@@ -36,7 +40,7 @@
             controller: 'JoinChatController',
             controllerAs : 'joinChatCtrl'
         }).otherwise({
-            redirectTo: '/chat'
+            redirectTo: '/signup'
         });
     }]);
 

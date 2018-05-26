@@ -3,7 +3,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         var thisCtrl = this;
 
         this.messageList = [];
-        this.counter;
+       
         this.newText = "";
         this.chatName=""
 
@@ -11,33 +11,34 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             // Get the messages from the server through the rest api
             $http.get('http://127.0.0.1:5000/ChatApp/chat/1/messages').then(function(response) {
                 thisCtrl.messageList = response.data.Messages;
-                thisCtrl.chatName = thisCtrl.messageList[0]['chatName'];
+                //thisCtrl.chatName = thisCtrl.messageList[0]['chatName'];
 
                 var msg  = thisCtrl.messageList[0];
                 thisCtrl.chatName = msg["chatname"];
-                counter = thisCtrl.messageList.length;
+                
             });
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.postMsg = function(){
            
-            // Need to figure out who I am
-            var author = "jocasio";
+            
             var data = {};
             data.mtext = thisCtrl.newText
+
+            //These two need will be given after login
             data.uid = 1;
             data.cgid = 1;
             
-            var nextId = thisCtrl.counter++;
+         
             data.mrepliedmid = 0;
-            //data.mtimestamp = "2018-01-08 04:05:06";
+         
 
             var date = new Date();
             var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
             data.mtimestamp = d;
 
-            //thisCtrl.messageList.unshift({"uid": nextId, "mtext" : msg, "uid" : uid, "mtimestamp" : mtimestamp, "mrepliedmid" : mrepliedmid});
+            
             var reqURL = "http://localhost:5000/ChatApp/messages";
             console.log("reqURL: " + reqURL);
 

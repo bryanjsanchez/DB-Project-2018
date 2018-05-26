@@ -15,7 +15,7 @@ class UserDAO:
     
     def getAllUsers(self):
         cursor = self.conn.cursor()
-        query = "select * from users;"
+        query = "select uid,ufirstname,ulastname,uphone,uemail,uusername,upassword,uisactive from users;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -54,3 +54,13 @@ class UserDAO:
             result.append(row)        
             
         return result
+
+
+    def insert(self,firstname,lastname,phone,email,username,password,isactive):
+        cursor = self.conn.cursor()
+        query = "insert into users(ufirstname,ulastname,uphone,uemail,uusername,upassword,uisactive) "\
+                "values (%s,%s,%s,%s,%s,%s,%s) returning uid;"
+        cursor.execute(query,(firstname,lastname,phone,email,username,password,isactive,))
+        uid = cursor.fetchone()[0]
+        self.conn.commit()
+        return uid
