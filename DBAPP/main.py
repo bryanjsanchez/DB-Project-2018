@@ -154,13 +154,20 @@ def getAllChats():
     elif request.method == 'POST':
         return ChatHandler().newChat(request.json)
 
-@app.route('/ChatApp/chat/<int:cgid>')
+@app.route('/ChatApp/chat/<int:cgid>', methods=['GET', 'POST'])
 def getChatbyID(cgid):
-    return ChatHandler().getChatByID(cgid)
+    if request.method == 'GET':
+        return ChatHandler().getChatByID(cgid)
+    elif request.method == 'POST':
+        return ChatHandler().joinChat(request.json)
 
 @app.route('/ChatApp/chat/user/<int:uid>')
 def getChatbyUser(uid):
     return ChatHandler().getChatGroupsByUserId(uid)
+
+@app.route('/ChatApp/chat/user/<int:uid>/notmember')
+def getChatsNotJoined(uid):
+    return ChatHandler().getChatsNotJoined(uid)
 
 @app.route('/ChatApp/chat/<int:cgid>/messages')
 def getAllMessagesByChat(cgid):
@@ -175,7 +182,7 @@ def getChatbyName(cgid,uid):
     return ChatHandler().getChatMsgsByUserId(cgid,uid)
 
 @app.route('/ChatApp/chat/<int:cgid>/members')
-def getChatMemvers(cgid):
+def getChatMembers(cgid):
     return ChatHandler().getChatMembers(cgid)
 
 

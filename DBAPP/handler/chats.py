@@ -6,8 +6,8 @@ class ChatHandler:
     def mapToDict(self, row):
         result = {}
         result['Owner'] = row[0]
-        result['cgname'] = row[1]
-        result['cgid'] = row[2]
+        result['cgid'] = row[1]
+        result['cgname'] = row[2]
         return result
 
     def mapUserMsgsToDict(self,row):
@@ -45,6 +45,12 @@ class ChatHandler:
         result['cgname'] = row[2]
         return result
 
+    def mapChatMember(self, uid, cgid):
+        result = {}
+        result['uid'] = uid
+        result['cgid'] = cgid
+        return result
+
     def buildChat(self, cgid, chatname):
         result = {}
         result['cgid'] = cgid
@@ -70,6 +76,16 @@ class ChatHandler:
         for r in result:
             mapped_result.append(self.mapToDict(r))
         return jsonify(ChatGroups=mapped_result)
+
+    def getChatsNotJoined(self,uid):
+        dao = ChatDAO()
+        result = dao.getChatsNotJoined(uid)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="Not Found"), 404
+        for r in result:
+            mapped_result.append(self.mapToDict(r))
+        return jsonify(Chat=mapped_result)
 
     def getAllMessagesByChat(self, cgid):
         dao = ChatDAO()
@@ -132,5 +148,20 @@ class ChatHandler:
                 cgid = dao.newChat(chatname)
                 result = self.buildChat(cgid, chatname)
                 return jsonify(Chat=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def joinChat(self, form):
+        if len(form) != 2:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            print(form)
+            uid = form['uid']
+            cgid = form['cgid']
+            if uid and cgid:
+                dao = ChatDAO()
+                dao.joinChat(uid, cgid)
+                result = self.mapChatMember(uid, cgid)
+                return jsonify(ChatMember=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

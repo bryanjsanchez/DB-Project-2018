@@ -55,7 +55,6 @@ class UserDAO:
             
         return result
 
-
     def insert(self,firstname,lastname,phone,email,username,password,isactive):
         cursor = self.conn.cursor()
         query = "insert into users(ufirstname,ulastname,uphone,uemail,uusername,upassword,uisactive) "\
@@ -65,14 +64,14 @@ class UserDAO:
         self.conn.commit()
         return uid
     
-      def login(self, username, password):
+    def login(self, username, password):
         cursor = self.conn.cursor()
         result = []
         try:
             query = "select * from users where uusername = %s and upassword = %s;"
             cursor.execute(query, (username, password))
             result = cursor.fetchone()
-        except  ProgrammingError as Login_Fail:
+        except ProgrammingError as Login_Fail:
             print("No Log", Login_Fail)
 
             return result

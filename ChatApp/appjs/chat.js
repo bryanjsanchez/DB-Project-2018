@@ -1,21 +1,25 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope','$location',
-    function($http, $log, $scope,$location) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope','$location', '$routeParams',
+    function($http, $log, $scope, $location, $routeParams) {
         var thisCtrl = this;
 
         this.messageList = [];
        
-        this.newText = "";
+        this.newText = ""
         this.chatName=""
+        this.cgid = ""
 
         this.loadMessages = function(){
             // Get the messages from the server through the rest api
-            $http.get('http://127.0.0.1:5000/ChatApp/chat/1/messages').then(function(response) {
-                thisCtrl.messageList = response.data.Messages;
-                //thisCtrl.chatName = thisCtrl.messageList[0]['chatName'];
+            this.cgid = $routeParams.cgid
+            $http.get('http://127.0.0.1:5000/ChatApp/chat/' + this.cgid + '/messages').then(function(response) {
+                if (!('Error' in response.data)) {
+                    thisCtrl.messageList = response.data.Messages;
+                }
 
-                var msg  = thisCtrl.messageList[0];
-                thisCtrl.chatName = msg["chatname"];
-                
+            });
+            $http.get('http://127.0.0.1:5000/ChatApp/chat/' + this.cgid).then(function(response) {
+                thisCtrl.chatName = response.data.Chat[0].cgname;
+                console.log(response);
             });
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
@@ -198,27 +202,27 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.messageLikeUsers= function (mid) {
-            $location.url('/message/' + mid+ "/likes");
+            $location.url('/message/' + mid + "/likes");
         };
 
         this.messageDislikeUsers= function (mid) {
-            $location.url('/message/' + mid+ "/dislikes");
+            $location.url('/message/' + mid + "/dislikes");
         };
 
         this.replyToMessage = function(mid){
-            $location.url('/message/'+ mid+"/reply");
+            $location.url('/message/'+ mid +"/reply");
 
         };
 
-        this.newChat= function (mid) {
+        this.newChat= function () {
             $location.url('/newchat');
         };
 
-        this.addContact= function (mid) {
+        this.addContact= function () {
             $location.url('/addcontact');
         };
 
-        this.joinChat= function (mid) {
+        this.joinChat= function () {
             $location.url('/joinchat');
         };
 

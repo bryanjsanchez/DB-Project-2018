@@ -11,7 +11,7 @@
             templateUrl: 'pages/signup.html',
             controller: 'SignUpController',
             controllerAs : 'signupCtrl'
-        }).when('/chat', {
+        }).when('/chat/:cgid', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
@@ -40,7 +40,7 @@
             controller: 'JoinChatController',
             controllerAs : 'joinChatCtrl'
         }).otherwise({
-            redirectTo: '/signup'
+            redirectTo: '/joinchat'
         });
     }]);
 
