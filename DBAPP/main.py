@@ -3,20 +3,50 @@ from handler.messages import MessageHandler
 from handler.hashtags import HashtagHandler
 from handler.chats import ChatHandler
 
-from flask import Flask, request,jsonify
+from flask import Flask, request, session, redirect, url_for, escape, request, render_template,g
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 CORS(app)
 
-
+#################################
+#Login Methods#
+########################
 @app.route('/')
-def hello():
-    return "Hello"
+def index():
+   if 'user' in session:
+    username = session['user']
+    return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#
+   else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
 
-@app.route('/ChatApp/login/')
-def log():
-    return "No logging!"
+@app.route('/ChatApp/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':  # Check for Loggin Attempt
+        session.pop('user', None)
+        result = UserHandler().login(request.form['username'], request.form['password'])
+        if not(result is None):  # PassWord Check, insert query here
+            session['user'] = request.form['username']
+            return redirect(url_for('protected'))
+
+    return render_template('index.html')
+
+@app.route('/protected')
+def protected():
+    if g.user:
+        return render_template('protected.html')
+
+    return redirect(url_for('index'))
+
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
+
+
+
 
 
 ##### Routes for Users #####
