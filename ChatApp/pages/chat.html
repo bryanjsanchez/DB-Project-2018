@@ -47,11 +47,11 @@
                             </p>
                         </div>
                         <div class="card-action">
-                            <button class="btn waves-effect waves-light green" type="submit" name="action" ng-click="m.likes = m.likes + 1">
+                            <button class="btn waves-effect waves-light green" type="submit" name="action" ng-click="chatCtrl.likeMessage(m.mid)">
                                 <i class="material-icons">thumb_up</i> <span ng-bind= "m.likes">  </span>
                             </button>
                             <a class="waves-effect green lighten-1 btn-small" ng-click="chatCtrl.messageLikeUsers(m.mid)">Liked</a>
-                            <button class="btn waves-effect waves-light deep-orange" type="submit" name="action" ng-click="m.dislikes = m.dislikes+1">
+                            <button class="btn waves-effect waves-light deep-orange" type="submit" name="action" ng-click="chatCtrl.dislikeMessage(m.mid)">
                                 <i class="material-icons">thumb_down</i> <span ng-bind= "m.dislikes">  </span>
                             </button>
                             <a class="waves-effect deep-orange lighten-1 btn-small" ng-click="chatCtrl.messageDislikeUsers(m.mid)">Disliked</a>

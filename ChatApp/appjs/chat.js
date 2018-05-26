@@ -36,7 +36,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var date = new Date();
             var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
             data.mtimestamp = d;
-            
+
             //thisCtrl.messageList.unshift({"uid": nextId, "mtext" : msg, "uid" : uid, "mtimestamp" : mtimestamp, "mrepliedmid" : mrepliedmid});
             var reqURL = "http://localhost:5000/ChatApp/messages";
             console.log("reqURL: " + reqURL);
@@ -55,7 +55,62 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
-                    alert("New reply message added with id: " + response.data.Message.mid);
+                    alert("New  message added with id: " + response.data.Message.mid);
+                    $location.url('/chat');
+                }, //Error function
+                function (response) {
+                    // This is the error function
+                    // If we get here, some error occurred.
+                    // Verify which was the cause and show an alert.
+                    var status = response.status;
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
+                        alert("No hay conexion a Internet");
+                    }
+                    else if (status == 401) {
+                        alert("Su sesion expiro. Conectese de nuevo.");
+                    }
+                    else if (status == 403) {
+                        alert("No esta autorizado a usar el sistema.");
+                    }
+                    else if (status == 404) {
+                        alert("No se encontro la informacion solicitada.");
+                    }
+                    else {
+                        alert("Error interno del sistema.");
+                    }
+                }
+            );            
+            
+           
+            $location.url('/chat');        
+        };
+
+        this.likeMessage = function(mid){
+            var uid =1;//Will be replaced with logged in user.
+            var data = {};
+            data["uid"] = uid;
+            data["mid"] = mid;
+
+            var reqURL = "http://localhost:5000/ChatApp/messages/"+mid+"/likes";
+            console.log("reqURL: " + reqURL);
+
+            // configuration headers for HTTP request
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json;charset=utf-8;'
+                    //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+
+                }
+
+            }
+            $http.post(reqURL, data, config).then(
+                // Success function
+                function (response) {
+                    console.log("data: " + JSON.stringify(response.data));
+                    // tira un mensaje en un alert
+                    alert("New message added with id: " + response.data.Like.mrlike);
                     $location.url('/chat');
                 }, //Error function
                 function (response) {
@@ -82,12 +137,63 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 }
             );
-            alert("Created new message succesfully");
             
+            $location.url('/chat');
             
+        };
+
+        this.dislikeMessage = function(mid){
+            var uid =1;//Will be replaced with logged in user.
+            var data = {};
+            data["uid"] = uid;
+            data["mid"] = mid;
+
+            var reqURL = "http://localhost:5000/ChatApp/messages/"+mid+"/dislikes";
+            console.log("reqURL: " + reqURL);
+
+            // configuration headers for HTTP request
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json;charset=utf-8;'
+                    //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+
+                }
+
+            }
+            $http.post(reqURL, data, config).then(
+                // Success function
+                function (response) {
+                    console.log("data: " + JSON.stringify(response.data));
+                    // tira un mensaje en un alert
+                    alert("Disliked message successfully: " + response.data.Dislike.mrlike);
+                    $location.url('/chat');
+                }, //Error function
+                function (response) {
+                    // This is the error function
+                    // If we get here, some error occurred.
+                    // Verify which was the cause and show an alert.
+                    var status = response.status;
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
+                        alert("No hay conexion a Internet");
+                    }
+                    else if (status == 401) {
+                        alert("Su sesion expiro. Conectese de nuevo.");
+                    }
+                    else if (status == 403) {
+                        alert("No esta autorizado a usar el sistema.");
+                    }
+                    else if (status == 404) {
+                        alert("No se encontro la informacion solicitada.");
+                    }
+                    else {
+                        alert("Error interno del sistema.");
+                    }
+                }
+            );        
             
-            thisCtrl.newText = "";    
-            $location.url('/chat');        
+            $location.url('/chat');            
         };
 
         this.messageLikeUsers= function (mid) {

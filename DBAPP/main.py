@@ -59,17 +59,27 @@ def getMessageByID(mid):
 def getAllMessagesByUser(uid):
     return MessageHandler().getAllMessagesByUser(uid)
 
-@app.route('/ChatApp/messages/<int:mid>/likes')
+@app.route('/ChatApp/messages/<int:mid>/likes', methods=['GET','POST'])
 def getAllMessageLikesByMID(mid):
-    return MessageHandler().getAllMessageLikesByMID(mid)
+    if request.method == 'POST':
+        print("Request: ", request.json)
+        return MessageHandler().insertMessageLikeJson(request.json)
+    else:
+        if not request.args:
+            return MessageHandler().getAllMessageLikesByMID(mid)
 
 @app.route('/ChatApp/messages/<int:mid>/likes/number')
 def getNumberOfLikesByMID(mid):
     return MessageHandler().getNumberOfLikesByMID(mid)
 
-@app.route('/ChatApp/messages/<int:mid>/dislikes')
+@app.route('/ChatApp/messages/<int:mid>/dislikes',methods=['GET','POST'])
 def getAllMessageDislikesByMID(mid):
-    return MessageHandler().getAllMessageDislikesByMID(mid)
+    if request.method == 'POST':
+        print("Request: ", request.json)
+        return MessageHandler().insertMessageDislikeJson(request.json)
+    else:
+        if not request.args:
+            return MessageHandler().getAllMessageDislikesByMID(mid)
 
 @app.route('/ChatApp/messages/<int:mid>/dislikes/number')
 def getNumberOfDislikesByMID(mid):

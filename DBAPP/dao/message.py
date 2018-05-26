@@ -120,3 +120,13 @@ class MessageDAO:
         mid = cursor.fetchone()[0]
         self.conn.commit()
         return mid
+    
+    def insertLikeDislike(self,uid,mid,mrlike):
+        cursor = self.conn.cursor()
+        query = "insert into messagereaction(uid,mid,mrlike) "\
+                "values (%s,%s,%s);"
+        cursor.execute(query,(uid,mid,mrlike,))
+        self.conn.commit()
+
+    
+
