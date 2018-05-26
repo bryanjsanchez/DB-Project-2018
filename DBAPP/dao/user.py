@@ -64,3 +64,8 @@ class UserDAO:
         uid = cursor.fetchone()[0]
         self.conn.commit()
         return uid
+    
+     def login(self, username, password):
+        dao = UserDAO()
+        result = dao.login(username, password)
+        return result
