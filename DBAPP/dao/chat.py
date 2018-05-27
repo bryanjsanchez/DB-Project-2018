@@ -139,6 +139,6 @@ class ChatDAO:
     def joinChat(self, uid, cgid):
         cursor = self.conn.cursor()
         query = "INSERT INTO chatmember(uid, cgid) VALUES (%s, %s);"
-        cursor.execute(query, (uid, cgid,))
+        cursor.execute(query, (uid, cgid))
         self.conn.commit()
         return

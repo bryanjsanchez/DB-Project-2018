@@ -24,7 +24,6 @@ angular.module('AppChat').controller('NewChatController', ['$http', '$log', '$sc
                     cgid = response.data["Chat"]["cgid"]
                     reqURL = "http://localhost:5000/ChatApp/chat/" + cgid;
                     $http.post(reqURL, {
-                        'uid': 1,
                         'cgid' : cgid
                     }).then(
                         // Success function

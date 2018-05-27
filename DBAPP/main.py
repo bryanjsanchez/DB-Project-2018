@@ -86,13 +86,18 @@ def getLoggedUser():
     else:
         return jsonify(Error = "User is not logged in."), 404
         
+@app.route('/ChatApp/user/loggeduser', methods=['GET','POST'])
+def newContact():
+    print(request)
+    global loggedUID
+    if request.method == 'POST':
+        return UserHandler().newContact(request.json, loggedUID)
+
 @app.route('/ChatApp/user/<int:uid>', methods=['GET','POST'])
 def getUserByID(uid):
     print(request)
     if request.method == 'GET':
         return UserHandler().getUserByID(uid)
-    elif request.method == 'POST':
-        return UserHandler().newContact(request.json)
 
 @app.route('/ChatApp/user/<username>')
 def getUserByUserName(username):
@@ -194,7 +199,8 @@ def getChatbyID(cgid):
     if request.method == 'GET':
         return ChatHandler().getChatByID(cgid)
     elif request.method == 'POST':
-        return ChatHandler().joinChat(request.json)
+        global loggedUID
+        return ChatHandler().joinChat(request.json, loggedUID)
 
 @app.route('/ChatApp/chat/user/<int:uid>')
 def getChatbyUser(uid):
@@ -205,9 +211,10 @@ def getChatByUser():
     global loggedUID
     return ChatHandler().getChatGroupsByUserId(loggedUID)
 
-@app.route('/ChatApp/chat/user/<int:uid>/notmember')
-def getChatsNotJoined(uid):
-    return ChatHandler().getChatsNotJoined(uid)
+@app.route('/ChatApp/chat/user/loggeduser/notmember')
+def getChatsNotJoined():
+    global loggedUID
+    return ChatHandler().getChatsNotJoined(loggedUID)
 
 @app.route('/ChatApp/chat/<int:cgid>/messages')
 def getAllMessagesByChat(cgid):

@@ -156,12 +156,12 @@ class ChatHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def joinChat(self, form):
-        if len(form) != 2:
+    def joinChat(self, form, uid):
+        if len(form) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
             print(form)
-            uid = form['uid']
+            print(uid)
             cgid = form['cgid']
             if uid and cgid:
                 dao = ChatDAO()

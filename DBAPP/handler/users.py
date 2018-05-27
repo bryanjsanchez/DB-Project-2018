@@ -103,18 +103,18 @@ class UserHandler:
         result = dao.login(username, password)
         return result
 
-    def newContact(self, form):
-        if len(form) != 4:
+    def newContact(self, form, uid):
+        if len(form) != 3:
             return jsonify(Error="Malformed post request"), 400
         else:
             print(form)
-            uid = form['uid']
             firstname = form['firstname'].upper()
             lastname = form['lastname'].upper()
             emailphone = form['emailphone'].upper()
             if uid and firstname and lastname and emailphone:
                 dao = UserDAO()
                 dao.newContact(uid, firstname, lastname, emailphone)
+                return jsonify(Success="Successfully added contact"), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 

@@ -14,11 +14,10 @@ angular.module('AppChat').controller('AddContactController', ['$http', '$log', '
             // using the $routerParams object
 
             // Now create the url with the route to talk with the rest API
-            var reqURL = "http://localhost:5000/ChatApp/user/1";
+            var reqURL = "http://localhost:5000/ChatApp/user/loggeduser";
             console.log("reqURL: " + reqURL);
             // Now issue the http request to the rest API
             $http.post(reqURL, {
-                'uid' : 1,
                 'firstname' : $scope.firstname,
                 'lastname' : $scope.lastname,
                 'emailphone' : $scope.emailphone

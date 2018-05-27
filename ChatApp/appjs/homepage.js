@@ -49,6 +49,5 @@ angular.module('AppChat').controller('HPController', ['$http', '$log', '$scope',
         };
         
         this.loadChats();
-
-      
-    }]);
+    }]
+);

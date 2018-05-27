@@ -11,7 +11,7 @@ angular.module('AppChat').controller('JoinChatController', ['$http', '$log', '$s
 
         this.loadChats = function(){
             // Now create the url with the route to talk with the rest API
-            var reqURL = "http://localhost:5000/ChatApp/chat/user/1/notmember";
+            var reqURL = "http://localhost:5000/ChatApp/chat/user/loggeduser/notmember";
             console.log("reqURL: " + reqURL);
             // Now issue the http request to the rest API
             $http.get(reqURL).then(
@@ -53,7 +53,6 @@ angular.module('AppChat').controller('JoinChatController', ['$http', '$log', '$s
             console.log("reqURL: " + reqURL);
             // Now issue the http request to the rest API
             $http.post(reqURL, {
-                'uid': 1,
                 'cgid' : cgid
             }).then(
                 // Success function

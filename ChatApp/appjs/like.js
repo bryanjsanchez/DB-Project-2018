@@ -52,4 +52,5 @@ angular.module('AppChat').controller('LikesController', ['$http', '$log', '$scop
         };
 
         this.loadUsersThatLikedMessage();
-}]);
+    }]
+);
