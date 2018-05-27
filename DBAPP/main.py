@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 CORS(app)
 
-sessionId = 0
+loggedUID = 0
 
 #################################
 #Login Methods#
@@ -26,16 +26,16 @@ def index():
 @app.route('/ChatApp/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':  # Check for Loggin Attempt
-        session.pop('user', None)
-        session.pop('id', None)
+        #session.pop('user', None)
+        #session.pop('id', None)
         result = UserHandler().login(request.form['username'], request.form['password'])
         if not(result is None):  # PassWord Check, insert query here
-            session['user'] = result[0]
-            session['id'] = result[1]
-            global sessionId
-            sessionId = result[1]
+           # session['user'] = result[0]
+            #session['id'] = result[1]
+            global loggedUID
+            loggedUID = result[1]
             #print('\n\n\n' + str(sessionId) + '\n\n\n')
-            return redirect(url_for('protected'))
+            return jsonify("Logged In")#redirect(url_for('protected'))
 
     return render_template('index.html')
 
@@ -51,6 +51,17 @@ def before_request():
     g.user = None
     if 'user' in session:
         g.user = session['user']
+
+@app.route('/logout')
+def logout():
+    global loggedUID
+    if loggedUID !=0:
+        loggedUID = 0
+        return jsonify("Logged out sucessfully")
+    else:
+        return jsonify(Error = "You need to be logged in before you can logout"), 404
+
+
 
 
 
@@ -69,8 +80,9 @@ def getAllUsers():
 
 @app.route('/ChatApp/user',methods=['GET'])
 def getLoggedUser():
-    if 'id' in session:
-        return UserHandler().getUserByID(session['id'])
+    global loggedUID
+    if loggedUID != 0:
+        return UserHandler().getUserByID(loggedUID)
     else:
         return jsonify(Error = "User is not logged in."), 404
         
@@ -185,8 +197,8 @@ def getChatbyUser(uid):
 
 @app.route('/ChatApp/chat/loggeduser')
 def getChatByUser():
-    global sessionId
-    return ChatHandler().getChatGroupsByUserId(sessionId)
+    global loggedUID
+    return ChatHandler().getChatGroupsByUserId(loggedUID)
 
 @app.route('/ChatApp/chat/user/<int:uid>/notmember')
 def getChatsNotJoined(uid):

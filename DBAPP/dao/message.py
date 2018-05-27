@@ -25,15 +25,11 @@ class MessageDAO:
     
     def getMessageByID(self, mid):
         cursor = self.conn.cursor()
-        query = "select mid,uid as mauthor,mtext,mtimestamp,mrepliedmid "\
+        query = "select mid,uid as mauthor,cgid,mtext,mtimestamp,mrepliedmid "\
                 " from message " \
                 "where mid = %s"
         cursor.execute(query,(mid,))
-        result = []
-        
-        for row in cursor:
-            print(row)
-            result.append(row)
+        result = cursor.fetchone()        
         return result
     
     def getAllMessagesByUser(self, uid):

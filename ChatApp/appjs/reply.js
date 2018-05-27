@@ -11,6 +11,9 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
         var replyMessage = "";
         var messageData ="";
 
+        var uid = "";
+        var cgid ="";
+
         this.loadMessage = function(){
             // Get the target part id from the parameter in the url
             // using the $routerParams object
@@ -28,6 +31,7 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
                     var msg = response.data.Message;
                     thisCtrl.messageData = msg;
                     thisCtrl.orgMessage = msg["mtext"];
+                    thisCtrl.cgid = msg["cgid"]
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -53,6 +57,10 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
                     }
                 }
             );
+
+            $http.get("http://127.0.0.1:5000/ChatApp/user").then(function(response){
+                thisCtrl.uid = response.data.User.uid;
+            });
         };
 
         this.postReply = function(){
@@ -61,15 +69,20 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
             // Need to figure out who I am
 
             var data = {};
-            data.uid = 1;
+
+            var uid = thisCtrl.uid;
+            var cgid = thisCtrl.cgid;
+            
+            data.uid = uid;
+            data.cgid = cgid;
            
             var date = new Date();
             var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
             data.mtimestamp = d;
             
-            data.cgid = 1;
+          
             data.mrepliedmid = thisCtrl.messageData["mid"];            
-            var author = "jocasio";
+            
             data.mtext = "RE:"+"\""+oldMsg+"\""+msg;
 
             var reqURL = "http://localhost:5000/ChatApp/messages";

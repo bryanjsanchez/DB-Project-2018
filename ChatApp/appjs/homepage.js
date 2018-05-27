@@ -36,6 +36,11 @@ angular.module('AppChat').controller('HPController', ['$http', '$log', '$scope',
         };
 
         this.logOut = function(){
+           var reqURL = "http://localhost:5000/logout"
+            $http.get(reqURL).then(function(response) {
+                thisCtrl.chatList  = response.data.ChatGroups;
+                console.log(response);
+            })
            $location.url('/login');  
         };
         

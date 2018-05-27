@@ -4,9 +4,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.messageList = [];
        
-        this.newText = ""
-        this.chatName=""
-        this.cgid = ""
+        this.newText = "";
+        this.chatName="";
+        this.cgid = "";
+        this.uid = "";
 
         this.loadMessages = function(){
             // Get the messages from the server through the rest api
@@ -21,18 +22,22 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 thisCtrl.chatName = response.data.Chat[0].cgname;
                 console.log(response);
             });
+
+            $http.get("http://127.0.0.1:5000/ChatApp/user").then(function(response){
+                thisCtrl.uid = response.data.User.uid;
+            });
             $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.postMsg = function(){
-           
-            
+            var cgid =thisCtrl.cgid;
+            var uid =thisCtrl.uid;
             var data = {};
             data.mtext = thisCtrl.newText
 
             //These two need will be given after login
-            data.uid = 1;
-            data.cgid = 1;
+            data.uid = uid;
+            data.cgid = cgid;
             
          
             data.mrepliedmid = 0;
@@ -61,7 +66,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
                     alert("New  message added with id: " + response.data.Message.mid);
-                    $location.url('/chat');
+                    $location.url('/chat' + cgid);
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -89,11 +94,12 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             );            
             
            
-            $location.url('/chat/'+thisCtrl.cgid);        
+            $location.url('/chat/'+cgid);        
         };
 
         this.likeMessage = function(mid){
-            var uid =1;//Will be replaced with logged in user.
+            var uid =thisCtrl.uid;
+            var cgid = thisCtrl.cgid;
             var data = {};
             data["uid"] = uid;
             data["mid"] = mid;
@@ -152,7 +158,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
         this.dislikeMessage = function(mid){
-            var uid =1;//Will be replaced with logged in user.
+            var uid =thisCtrl.uid;
+            var cgid =thisCtrl.cgid;
             var data = {};
             data["uid"] = uid;
             data["mid"] = mid;
