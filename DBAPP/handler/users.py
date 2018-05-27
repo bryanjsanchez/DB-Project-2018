@@ -88,7 +88,6 @@ class UserHandler:
         username = json["username"]
         password = json["password"]
         isactive = "true"
-
         if firstname!=None and lastname!=None and phone!=None and email!=None and username!=None and password!=None and isactive!=None:
             dao = UserDAO()
             uid = dao.insert(firstname,lastname,phone,email,username,password,isactive)
@@ -96,11 +95,25 @@ class UserHandler:
             return jsonify(User=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
-
-
         return None
     
     def login(self, username, password):
         dao = UserDAO()
         result = dao.login(username, password)
         return result
+
+    def newContact(self, form):
+        if len(form) != 4:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            print(form)
+            uid = form['uid']
+            firstname = form['firstname'].upper()
+            lastname = form['lastname'].upper()
+            emailphone = form['emailphone'].upper()
+            if uid and firstname and lastname and emailphone:
+                dao = UserDAO()
+                dao.newContact(uid, firstname, lastname, emailphone)
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2913f48-b40e-4b04-bab8-45588b09cbb4" name="Default" comment="Merge branch 'dev' of https://github.com/saleur/DB-Project-2018 into dev&#10;&#10;# Conflicts:&#10;#&#9;ChatApp/appjs/main.js">
+    <list default="true" id="d2913f48-b40e-4b04-bab8-45588b09cbb4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp/appjs/joinchat.js" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/appjs/joinchat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp/appjs/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/appjs/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp/appjs/newchat.js" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/appjs/newchat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatApp/appjs/addcontact.js" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/appjs/addcontact.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatApp/pages/addcontact.html" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/pages/addcontact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp/pages/joinchat.html" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/pages/joinchat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp/pages/newchat.html" beforeDir="false" afterPath="$PROJECT_DIR$/ChatApp/pages/newchat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBAPP/dao/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBAPP/dao/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBAPP/handler/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBAPP/handler/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBAPP/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBAPP/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,65 +18,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="joinchat.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChatApp/pages/joinchat.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="joinchat.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/joinchat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-384">
-              <caret line="51" column="69" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newchat.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/newchat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="93" column="4" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addcontact.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/addcontact.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-438">
-              <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="addcontact.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ChatApp/pages/addcontact.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newchat.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ChatApp/pages/newchat.html">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
-              <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addcontact.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/addcontact.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -85,8 +39,32 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DBAPP/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="168" column="21" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="21" />
+            <state>
+              <caret line="55" column="32" lean-forward="true" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBAPP/handler/users.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBAPP/dao/user.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="70" column="55" lean-forward="true" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -97,8 +75,26 @@
       <file leaf-file-name="chat.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-738">
+            <state relative-caret-position="-800">
               <caret line="41" column="65" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="joinchat.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChatApp/appjs/joinchat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="62" column="20" lean-forward="true" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chats.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBAPP/handler/chats.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2970">
+              <caret line="166" column="82" selection-start-line="153" selection-start-column="4" selection-end-line="166" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -126,22 +122,22 @@
         <option value="$PROJECT_DIR$/ChatApp/pages/likes.html" />
         <option value="$PROJECT_DIR$/ChatApp/pages/dislikes.html" />
         <option value="$PROJECT_DIR$/ChatApp/index.html" />
-        <option value="$PROJECT_DIR$/ChatApp/appjs/addcontact.js" />
         <option value="$PROJECT_DIR$/DBAPP/dao/hashtag.py" />
         <option value="$PROJECT_DIR$/DBAPP/dao/message.py" />
-        <option value="$PROJECT_DIR$/DBAPP/dao/user.py" />
-        <option value="$PROJECT_DIR$/DBAPP/handler/users.py" />
         <option value="$PROJECT_DIR$/ChatApp/pages/chat.html" />
         <option value="$PROJECT_DIR$/ChatApp/appjs/chat.js" />
-        <option value="$PROJECT_DIR$/DBAPP/main.py" />
         <option value="$PROJECT_DIR$/DBAPP/handler/chats.py" />
         <option value="$PROJECT_DIR$/DBAPP/dao/chat.py" />
         <option value="$PROJECT_DIR$/ChatApp/appjs/main.js" />
         <option value="$PROJECT_DIR$/ChatApp/appjs/joinchat.js" />
         <option value="$PROJECT_DIR$/ChatApp/appjs/newchat.js" />
-        <option value="$PROJECT_DIR$/ChatApp/pages/addcontact.html" />
         <option value="$PROJECT_DIR$/ChatApp/pages/joinchat.html" />
         <option value="$PROJECT_DIR$/ChatApp/pages/newchat.html" />
+        <option value="$PROJECT_DIR$/ChatApp/pages/addcontact.html" />
+        <option value="$PROJECT_DIR$/DBAPP/main.py" />
+        <option value="$PROJECT_DIR$/DBAPP/dao/user.py" />
+        <option value="$PROJECT_DIR$/DBAPP/handler/users.py" />
+        <option value="$PROJECT_DIR$/ChatApp/appjs/addcontact.js" />
       </list>
     </option>
   </component>
@@ -166,6 +162,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,7 +208,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -310,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527370494688</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Create chat adds user and redirects to chatgroup page">
+      <created>1527376334143</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1527376334143</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -323,8 +326,7 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15636364" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3178392" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2437186" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.28894472" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -338,6 +340,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +384,8 @@
     <MESSAGE value="Add pages for new chat, add contact and join chat" />
     <MESSAGE value="Allow user to join chat" />
     <MESSAGE value="Merge branch 'dev' of https://github.com/saleur/DB-Project-2018 into dev&#10;&#10;# Conflicts:&#10;#&#9;ChatApp/appjs/main.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'dev' of https://github.com/saleur/DB-Project-2018 into dev&#10;&#10;# Conflicts:&#10;#&#9;ChatApp/appjs/main.js" />
+    <MESSAGE value="Create chat adds user and redirects to chatgroup page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create chat adds user and redirects to chatgroup page" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ChatApp/index.html" />
@@ -421,26 +425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DBAPP/handler/users.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DBAPP/dao/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1422">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DBAPP/dao/message.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1700">
@@ -471,10 +455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -493,13 +473,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChatApp/pages/homepage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ChatApp/appjs/homepage.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -507,48 +481,10 @@
     <entry file="file://$PROJECT_DIR$/ChatApp/appjs/signup.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/DBAPP/handler/chats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1746">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-738">
-          <caret line="41" column="65" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DBAPP/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="168" column="21" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ChatApp/appjs/newchat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="93" column="4" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChatApp/pages/addcontact.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -559,24 +495,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/newchat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/handler/chats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2970">
+          <caret line="166" column="82" selection-start-line="153" selection-start-column="4" selection-end-line="166" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/appjs/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChatApp/pages/addcontact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/chat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-800">
+          <caret line="41" column="65" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ChatApp/appjs/joinchat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="51" column="69" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="69" />
+        <state relative-caret-position="162">
+          <caret line="62" column="20" lean-forward="true" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="55" column="32" lean-forward="true" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/dao/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="70" column="55" lean-forward="true" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBAPP/handler/users.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChatApp/appjs/addcontact.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-438">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChatApp/pages/newchat.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        <state relative-caret-position="143">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
         </state>
       </provider>
     </entry>

@@ -51,8 +51,7 @@ class UserDAO:
         cursor.execute(query,(uid,))
         result = []
         for row in cursor:
-            result.append(row)        
-            
+            result.append(row)
         return result
 
     def insert(self,firstname,lastname,phone,email,username,password,isactive):
@@ -73,8 +72,24 @@ class UserDAO:
             result = cursor.fetchone()
         except ProgrammingError as Login_Fail:
             print("No Log", Login_Fail)
-
             return result
-
         return result
+
+    def newContact(self, uid, firstname, lastname, emailphone):
+        cursor = self.conn.cursor()
+        result = []
+        query = "select uid " \
+                "from users " \
+                "where upper(ufirstname) = %s " \
+                "and upper(ulastname) = %s " \
+                "and (upper(uemail) = %s or uphone = %s)"
+        cursor.execute(query, (firstname, lastname, emailphone, emailphone))
+        contact = cursor.fetchone()[0]
+        if contact:
+            query = "insert into contact(uid, ccontact) " \
+                    "values (%s, %s);"
+            cursor.execute(query, (uid, contact))
+            self.conn.commit()
+
+
 

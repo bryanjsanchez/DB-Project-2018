@@ -60,9 +60,13 @@ def getAllUsers():
         if not request.args:
             return UserHandler().getAllUsers()
         
-@app.route('/ChatApp/user/<int:uid>')
+@app.route('/ChatApp/user/<int:uid>', methods=['GET','POST'])
 def getUserByID(uid):
-    return UserHandler().getUserByID(uid)
+    print(request)
+    if request.method == 'GET':
+        return UserHandler().getUserByID(uid)
+    elif request.method == 'POST':
+        return UserHandler().newContact(request.json)
 
 @app.route('/ChatApp/user/<username>')
 def getUserByUserName(username):
