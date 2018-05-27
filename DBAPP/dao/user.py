@@ -1,5 +1,6 @@
 from config.dbconfig import pg_config
 import psycopg2
+from psycopg2 import ProgrammingError
 class UserDAO:
 
     def __init__(self):
