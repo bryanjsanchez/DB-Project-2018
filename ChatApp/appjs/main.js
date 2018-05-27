@@ -43,6 +43,10 @@
             templateUrl: 'pages/joinchat.html',
             controller: 'JoinChatController',
             controllerAs : 'joinChatCtrl'
+        }).when('/viewcontacts',{
+            templateUrl: 'pages/viewcontacts.html',
+            controller: 'ViewContactsController',
+            controllerAs : 'viewContactsCtrl'
         }).otherwise({
             redirectTo: '/homepage'
         });

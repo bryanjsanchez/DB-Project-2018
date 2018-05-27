@@ -35,6 +35,10 @@ angular.module('AppChat').controller('HPController', ['$http', '$log', '$scope',
             $location.url('/joinchat');
         };
 
+        this.viewContacts = function () {
+            $location.url('/viewcontacts');
+        };
+
         this.logOut = function(){
            var reqURL = "http://localhost:5000/logout"
             $http.get(reqURL).then(function(response) {

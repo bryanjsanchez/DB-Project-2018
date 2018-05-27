@@ -13,7 +13,7 @@ CORS(app)
 
 loggedUID = 0
 
-#################################
+########################
 #Login Methods#
 ########################
 @app.route('/')
@@ -101,6 +101,11 @@ def getUserByUserName(username):
 @app.route('/ChatApp/user/<int:uid>/contacts')
 def getAllContactsByID(uid):
     return UserHandler().getAllContactsByID(uid)
+
+@app.route('/ChatApp/user/loggeduser/contacts')
+def getContacts():
+    global loggedUID
+    return UserHandler().getAllContactsByID(loggedUID)
 
 
 ##### Routes for Messages #####
