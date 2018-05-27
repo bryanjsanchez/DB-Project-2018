@@ -11,15 +11,17 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 CORS(app)
 
+sessionId = 0
+
 #################################
 #Login Methods#
 ########################
 @app.route('/')
-def index():
-   if 'user' in session:
-    username = session['user']
-    return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#
-   else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
+def index():   
+    if 'user' in session:
+        username = session['user']
+        return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#        
+    else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
 
 @app.route('/ChatApp/login/', methods=['GET', 'POST'])
 def login():
@@ -30,6 +32,9 @@ def login():
         if not(result is None):  # PassWord Check, insert query here
             session['user'] = result[0]
             session['id'] = result[1]
+            global sessionId
+            sessionId = result[1]
+            #print('\n\n\n' + str(sessionId) + '\n\n\n')
             return redirect(url_for('protected'))
 
     return render_template('index.html')
@@ -177,6 +182,11 @@ def getChatbyID(cgid):
 @app.route('/ChatApp/chat/user/<int:uid>')
 def getChatbyUser(uid):
     return ChatHandler().getChatGroupsByUserId(uid)
+
+@app.route('/ChatApp/chat/loggeduser')
+def getChatByUser():
+    global sessionId
+    return ChatHandler().getChatGroupsByUserId(sessionId)
 
 @app.route('/ChatApp/chat/user/<int:uid>/notmember')
 def getChatsNotJoined(uid):
