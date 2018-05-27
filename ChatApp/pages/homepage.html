@@ -12,12 +12,32 @@
                 </div>
                 <div class="card-action white">
                     <button class="btn waves-effect blue-grey " type="submit" name="action" ng-click="hpCtrl.logOut()">LogOut
-                    <i class="material-icons right">send</i>
+                    <i class="material-icons left">send</i>
                     </button>
                 </div>
               
             </div>
         </div>
     </div>   
+</div>
+
+<div>
+   
+    <div ng-repeat="cg in hpCtrl.chatList">
+        
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="card ">
+                    <div class="card-content">
+                        <!-- Card Title is the person who write the message -->
+                        <span class="card-title">{{cg["cgname"]}}</span>                       
+                    </div>
+                    <div class="card-action">                       
+                        <a class="waves-effect deep-red lighten-1 btn-small" ng-click="hpCtrl.goToChat(cg.cgid)">SeeChat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 

@@ -3,7 +3,7 @@ from handler.messages import MessageHandler
 from handler.hashtags import HashtagHandler
 from handler.chats import ChatHandler
 
-from flask import Flask, request, session, redirect, url_for, escape, request, render_template,g
+from flask import Flask,jsonify, request, session, redirect, url_for, escape, request, render_template,g
 from flask_cors import CORS
 import os
 
@@ -27,7 +27,8 @@ def login():
         session.pop('user', None)
         result = UserHandler().login(request.form['username'], request.form['password'])
         if not(result is None):  # PassWord Check, insert query here
-            session['user'] = request.form['username']
+            session['username'] = request.form['username']
+            session['uid'] = request.form['uid']
             return redirect(url_for('protected'))
 
     return render_template('index.html')
@@ -59,6 +60,13 @@ def getAllUsers():
     else:
         if not request.args:
             return UserHandler().getAllUsers()
+
+@app.route('/ChatApp/user')
+def getLoggedUser():
+    if 'uid' in session:
+        return UserHandler().getUserByID(session['uid'])
+    else:
+        return jsonify(Error = "User is not logged in."), 404
         
 @app.route('/ChatApp/user/<int:uid>', methods=['GET','POST'])
 def getUserByID(uid):

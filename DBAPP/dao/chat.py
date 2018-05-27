@@ -79,7 +79,7 @@ class ChatDAO:
 
     def getChatGroupsByUserId(self,uid):
         cursor = self.conn.cursor()
-        query = "select cgid, cgname   " \
+        query = "select  cgid, cgname   " \
                 "from (users natural inner join chatmember) " \
                 "natural join chatgroup " \
                 "where uid = %s"
@@ -87,6 +87,7 @@ class ChatDAO:
         result = []
         for row in cursor:
             result.append(row)
+
         return result
 
     def getChatsNotJoined(self,uid):

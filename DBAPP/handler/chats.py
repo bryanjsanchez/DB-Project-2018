@@ -9,6 +9,11 @@ class ChatHandler:
         result['cgid'] = row[1]
         result['cgname'] = row[2]
         return result
+    def mapToDictUserChatGroups(self,row):
+        result = {}
+        result['cgid'] = row[0]
+        result['cgname'] = row[1]
+        return result
 
     def mapUserMsgsToDict(self,row):
         result = {}
@@ -74,7 +79,7 @@ class ChatHandler:
         if not result:
             return jsonify(Error="Not Found"), 404        
         for r in result:
-            mapped_result.append(self.mapToDict(r))
+            mapped_result.append(self.mapToDictUserChatGroups(r))
         return jsonify(ChatGroups=mapped_result)
 
     def getChatsNotJoined(self,uid):

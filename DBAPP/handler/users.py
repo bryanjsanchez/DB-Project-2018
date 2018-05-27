@@ -6,6 +6,7 @@ class UserHandler:
     #Maps a UserDAO to a dictionary
     def mapToDict(self,row):
         result = {}
+        #print("\n\n\n\n" + row + "\n\n\n\n")
         result['uid'] = row[0]
         result['firstname'] = row[1]
         result['lastname'] = row[2]
@@ -62,7 +63,7 @@ class UserHandler:
         if not result:
             return jsonify(Error="Not Found"), 404
         else:
-            return jsonify(User=result)
+            return jsonify(User=self.mapToDict(result))
     
     def getUserByUserName(self,username):
         dao = UserDAO()
@@ -70,7 +71,7 @@ class UserHandler:
         if not result:
             return jsonify(Error="Not Found"), 404
         else:
-            return jsonify(User=result)
+            return jsonify(User=self.mapToDict(result))
 
     def getAllContactsByID(self, id):
         result = self.mapContactsToDict(id)

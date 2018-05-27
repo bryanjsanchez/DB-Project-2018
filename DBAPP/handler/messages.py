@@ -47,11 +47,12 @@ class MessageHandler:
         result['mrepliedmid'] = mrepliedmid
         return result
     
-    def buildLikeDislikeAttributes(self,uid,mid,mrlike):
+    def buildLikeDislikeAttributes(self,uid,mid,mrlike,mrtimestamp):
         result = {}
         result['uid'] = uid
         result['mid'] = mid
         result['mrlike'] = mrlike
+        result['mrtimestamp'] = mrtimestamp
         return result
 
     ##### Handlers #####
@@ -157,12 +158,13 @@ class MessageHandler:
     def insertMessageLikeJson(self,json):
         uid = json["uid"]
         mid = json["mid"]
+        mrtimestamp = json["mrtimestamp"]
         mrlike = "true"
 
-        if uid!=None and mid!=None:
+        if uid!=None and mid!=None and mrtimestamp!=None:
             dao = MessageDAO()
-            dao.insertLikeDislike(uid,mid,mrlike)
-            result = self.buildLikeDislikeAttributes(uid,mid,mrlike)
+            dao.insertLikeDislike(uid,mid,mrlike,mrtimestamp)
+            result = self.buildLikeDislikeAttributes(uid,mid,mrlike,mrtimestamp)
             return jsonify(Like = result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
@@ -170,12 +172,13 @@ class MessageHandler:
     def insertMessageDislikeJson(self,json):
         uid = json["uid"]
         mid = json["mid"]
+        mrtimestamp = json["mrtimestamp"]
         mrlike = "false"
 
-        if uid!=None and mid!=None:
+        if uid!=None and mid!=None and mrtimestamp!=None:
             dao = MessageDAO()
-            dao.insertLikeDislike(uid,mid,mrlike)
-            result = self.buildLikeDislikeAttributes(uid,mid,mrlike)
+            dao.insertLikeDislike(uid,mid,mrlike,mrtimestamp)
+            result = self.buildLikeDislikeAttributes(uid,mid,mrlike,mrtimestamp)
             return jsonify(Dislike = result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400   

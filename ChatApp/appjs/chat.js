@@ -89,7 +89,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             );            
             
            
-            $location.url('/chat');        
+            $location.url('/chat/'+thisCtrl.cgid);        
         };
 
         this.likeMessage = function(mid){
@@ -97,6 +97,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var data = {};
             data["uid"] = uid;
             data["mid"] = mid;
+            var date = new Date();
+            var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
+            data["mrtimestamp"] = d;
+
 
             var reqURL = "http://localhost:5000/ChatApp/messages/"+mid+"/likes";
             console.log("reqURL: " + reqURL);
@@ -115,8 +119,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
-                    alert("New message added with id: " + response.data.Like.mrlike);
-                    $location.url('/chat');
+                    alert("Liked message added with id: " + response.data.Like.mrlike);
+                    $location.url('/chat/'+thisCtrl.cgid);
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -143,7 +147,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 }
             );
             
-            $location.url('/chat');
+            $location.url('/chat/'+thisCtrl.cgid);
             
         };
 
@@ -152,6 +156,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var data = {};
             data["uid"] = uid;
             data["mid"] = mid;
+
+            var date = new Date();
+            var d = date.getFullYear().toString() + "-" + date.getMonth().toString()+ "-" + date.getDate().toString()+" " +date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getSeconds().toString();
+            data["mrtimestamp"] = d;   
 
             var reqURL = "http://localhost:5000/ChatApp/messages/"+mid+"/dislikes";
             console.log("reqURL: " + reqURL);
@@ -171,7 +179,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
                     alert("Disliked message successfully: " + response.data.Dislike.mrlike);
-                    $location.url('/chat');
+                    $location.url('/chat/'+thisCtrl.cgid);
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -198,7 +206,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 }
             );        
             
-            $location.url('/chat');            
+            $location.url('/chat/'+thisCtrl.cgid);            
         };
 
         this.messageLikeUsers= function (mid) {

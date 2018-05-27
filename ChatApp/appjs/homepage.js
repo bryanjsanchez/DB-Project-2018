@@ -2,25 +2,47 @@ angular.module('AppChat').controller('HPController', ['$http', '$log', '$scope',
     function($http, $log, $scope,$location) {
         var thisCtrl = this;
 
-        this.messageList = [];
+        this.chatList = [];
        
-        this.uid = "";//Will be replaced with correct uid.
+        this.uid = "";
 
-        this.createChat= function (uid) {
+        this.loadChats = function(){
+            // Get the messages from the server through the rest api
+            
+            $http.get('http://127.0.0.1:5000/ChatApp/user').then(function(response) {
+                if (!('Error' in response.data)) {
+                    thisCtrl.uid = response.data.User.uid;
+                }
+
+            });
+            $http.get('http://127.0.0.1:5000/ChatApp/chat/user/1' + thisCtrl.uid).then(function(response) {
+                thisCtrl.chatList  = response.data.ChatGroups;
+                console.log(response);
+            });
+            $log.error("ChatGroups Loaded: ", JSON.stringify(thisCtrl.chatList));
+        };
+
+        this.goToChat = function(cgid){
+            $location.url('/chat/'+cgid);
+        }
+
+        this.createChat= function () {
             $location.url('/newchat');
         };
 
-        this.addContact= function (uid) {
+        this.addContact= function () {
             $location.url('/addcontact');
         };
 
-        this.joinChat= function (uid) {
+        this.joinChat= function () {
             $location.url('/joinchat');
         };
 
-        this.logOut = function(uid){
+        this.logOut = function(){
            $location.url('/login');  
         };
+
+        this.loadChats();
 
       
     }]);

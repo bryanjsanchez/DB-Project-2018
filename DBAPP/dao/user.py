@@ -24,21 +24,17 @@ class UserDAO:
     
     def getUserByID(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from users " \
+        query = "select uid,ufirstname,ulastname,uphone,uemail,uusername,upassword,uisactive from users " \
                 "where uid = %s;"
         cursor.execute(query,(uid,))
-        result = []
-        for  row in cursor:
-            result.append(row)
+        result = cursor.fetchone()         
         return result  
 
     def getUserByUserName(self,username):
         cursor = self.conn.cursor()
         query = "select * from users where uusername = %s"
         cursor.execute(query,(username,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()       
         return result     
 
     #Returns a collection of users composing a contact list.
@@ -67,7 +63,7 @@ class UserDAO:
         cursor = self.conn.cursor()
         result = []
         try:
-            query = "select * from users where uusername = %s and upassword = %s;"
+            query = "select uusername,uid from users where uusername = %s and upassword = %s;"
             cursor.execute(query, (username, password))
             result = cursor.fetchone()
         except ProgrammingError as Login_Fail:
