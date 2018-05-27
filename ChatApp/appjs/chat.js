@@ -65,8 +65,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
-                    alert("New  message added with id: " + response.data.Message.mid);
-                    $location.url('/chat' + cgid);
+                    location.reload();
                 }, //Error function
                 function (response) {
                     // This is the error function

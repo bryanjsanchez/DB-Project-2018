@@ -69,7 +69,7 @@ class ChatDAO:
                 "ON users.uid = message.uid " \
                 "WHERE message.cgid = %s " \
                 "GROUP BY message.cgid, message.mid, chatname, firstname, lastname, username " \
-                "ORDER BY message.mtimestamp;"
+                "ORDER BY message.mtimestamp DESC;"
         cursor.execute(query, (cgid,))
         cursor.execute(query, (cgid,))
         result = []
