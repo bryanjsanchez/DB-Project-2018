@@ -62,9 +62,9 @@ def getAllUsers():
         if not request.args:
             return UserHandler().getAllUsers()
 
-@app.route('/ChatApp/user')
+@app.route('/ChatApp/user',methods=['GET'])
 def getLoggedUser():
-    if 'uid' in session:
+    if 'id' in session:
         return UserHandler().getUserByID(session['id'])
     else:
         return jsonify(Error = "User is not logged in."), 404
