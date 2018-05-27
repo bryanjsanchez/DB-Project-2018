@@ -25,10 +25,11 @@ def index():
 def login():
     if request.method == 'POST':  # Check for Loggin Attempt
         session.pop('user', None)
+        session.pop('id', None)
         result = UserHandler().login(request.form['username'], request.form['password'])
         if not(result is None):  # PassWord Check, insert query here
-            session['username'] = request.form['username']
-            session['uid'] = request.form['uid']
+            session['user'] = result[0]
+            session['id'] = result[1]
             return redirect(url_for('protected'))
 
     return render_template('index.html')
@@ -64,7 +65,7 @@ def getAllUsers():
 @app.route('/ChatApp/user')
 def getLoggedUser():
     if 'uid' in session:
-        return UserHandler().getUserByID(session['uid'])
+        return UserHandler().getUserByID(session['id'])
     else:
         return jsonify(Error = "User is not logged in."), 404
         
