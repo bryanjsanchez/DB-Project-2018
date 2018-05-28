@@ -41,9 +41,8 @@ class UserDAO:
     #Returns a collection of users composing a contact list.
     def getContactsByID(self, uid):
         cursor = self.conn.cursor()
-        query  = "select ufirstname, ulastname " \
-                 "from users as U inner join contact as C on "\
-                 "(U.uid = C.uid) "\
+        query  = "select U.ufirstname, U.ulastname " \
+                 "from users as U natural inner join contact as C "\
                  "where C.ccontact = %s;"
         cursor.execute(query,(uid,))
         result = []
@@ -74,7 +73,7 @@ class UserDAO:
 
     def newContact(self, uid, firstname, lastname, emailphone):
         cursor = self.conn.cursor()
-        result = []
+        #result = []
         query = "select uid " \
                 "from users " \
                 "where upper(ufirstname) = %s " \
@@ -82,10 +81,11 @@ class UserDAO:
                 "and (upper(uemail) = %s or uphone = %s)"
         cursor.execute(query, (firstname, lastname, emailphone, emailphone))
         contact = cursor.fetchone()[0]
+        print("\n\n\n" + str(contact) + "\n\n\n")
         if contact:
             query = "insert into contact(uid, ccontact) " \
                     "values (%s, %s);"
-            cursor.execute(query, (uid, contact))
+            cursor.execute(query, (contact, uid,))
             self.conn.commit()
 
 
