@@ -30,19 +30,19 @@ class HashtagHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(Hashtag=mapped_result)
 
-    def getHashtagByID(self, hid):
+    def getHashtagByID(self, text):
         dao = HashtagDAO()
-        result = dao.getHashtagByID(hid)        
+        result = dao.getHashtagByID(text)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        return jsonify(Hashtag=self.mapToDict(result))
+        return jsonify(Hashtag=result)
 
-    def getHashtagByText(self, text):
+    def getHashtagByText(self, hid):
         dao = HashtagDAO()
-        result = dao.getHashtagByText(text)
+        result = dao.getHashtagByText(hid)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        return jsonify(Hashtag=self.mapToDict(result))
+        return jsonify(Hashtag=result)
 
     def getTop10Hashtags(self):
         dao = HashtagDAO()

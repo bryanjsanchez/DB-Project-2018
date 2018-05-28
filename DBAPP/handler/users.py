@@ -38,7 +38,7 @@ class UserHandler:
         result = {}
         result['uusername'] = row[0]
         result['day'] = row[1]
-        result['count'] = 2
+        result['count'] = row[2]
         return result
     
     def buildUserAttributes(self,uid,firstname,lastname,phone,email,username,password,isactive):
@@ -126,9 +126,10 @@ class UserHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
 
-    def getTopPerDay(self, day):
+    def getTopPerDay(self):
         dao = UserDAO()
-        result = dao.getTopPerDay(day)
+        result = dao.getTopPerDay()
+        print(result)
         if result is None:
             return jsonify(Error="Not Found"), 404
         else:
