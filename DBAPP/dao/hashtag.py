@@ -24,22 +24,29 @@ class HashtagDAO:
 
     def getHashtagByID(self, hid):
         cursor = self.conn.cursor()
-        query = "select * from hashtag " \
-                "where hid = {};".format(hid)
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
+        query = "select hid,htext,hcount from hashtag " \
+                "where hid = %s;"
+        cursor.execute(query,(hid,))
+        result = cursor.fetchone()        
         return result
 
     def getHashtagByText(self, text):
         cursor = self.conn.cursor()
+<<<<<<< Updated upstream
         query = "select * from hashtag " \
                 "where htext = '#{}';".format(text)
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
+=======
+        print("\n\n\n" + text + "\n\n\n")
+        hashtag = '#'+text
+        query = "select hid,htext,hcount from hashtag " \
+                "where htext = %s;"
+        cursor.execute(query,(hashtag,))
+        result = cursor.fetchone()        
+>>>>>>> Stashed changes
         return result
 
     def getTop10Hashtags(self):
