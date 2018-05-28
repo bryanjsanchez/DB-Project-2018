@@ -89,13 +89,12 @@ class UserDAO:
             self.conn.commit()
 
 
-    def getTopPerDay(self,day):
+    def getTopPerDay(self):
         cursor = self.conn.cursor()
-        query = "select uusername, date(mtimestamp)as day , count(*) as count from message natural inner join users where date(mtimestamp) = '{}'"\
-                " group by uusername, day order by  day desc, count desc;".format(day)
+        query = "with sample as (select uusername, date(mtimestamp)as day , count(*) as count from message natural inner join users group by uusername, day order by  day desc, count desc) select uusername , MAX.DAY, MAX.tot from (select sample.day as DAY, max(sample.count) AS tot from (select uusername, date(mtimestamp)as day , count(*) as count from message natural inner join users group by uusername, day order by  day desc, count desc) as sample group by DAY order by DAY) as MAX, sample where sample.day = MAX.DAY and MAX.tot = sample.count  and MAX.DAY> CURRENT_DATE - 7 order by MAX.DAY"
 
         print(query)
-        cursor.execute(query, (day,))
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
