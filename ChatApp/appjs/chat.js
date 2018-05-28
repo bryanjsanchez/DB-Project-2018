@@ -93,7 +93,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             );            
             
            
-            $location.url('/chat/'+cgid);        
+            location.reload();     
         };
 
         this.likeMessage = function(mid){
@@ -125,7 +125,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
                     alert("Liked message added with id: " + response.data.Like.mrlike);
-                    $location.url('/chat/'+thisCtrl.cgid);
+                    location.reload();
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -152,8 +152,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 }
             );
             
-            $location.url('/chat/'+thisCtrl.cgid);
-            
+            location.reload();
         };
 
         this.dislikeMessage = function(mid){
@@ -185,7 +184,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
                     alert("Disliked message successfully: " + response.data.Dislike.mrlike);
-                    $location.url('/chat/'+thisCtrl.cgid);
+                    location.reload();
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -212,7 +211,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 }
             );        
             
-            $location.url('/chat/'+thisCtrl.cgid);            
+            location.reload();          
         };
 
         this.messageLikeUsers= function (mid) {

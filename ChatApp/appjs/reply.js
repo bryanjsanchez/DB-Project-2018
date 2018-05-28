@@ -103,7 +103,8 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
                     alert("New reply message added with id: " + response.data.Message.mid);
-                    $location.url('/chat');
+                    console.log(JSON.stringify(cgid))
+                    $location.url('/chat/'+cgid);
                 }, //Error function
                 function (response) {
                     // This is the error function
