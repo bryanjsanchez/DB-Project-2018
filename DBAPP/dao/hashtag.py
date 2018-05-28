@@ -15,7 +15,7 @@ class HashtagDAO:
     
     def getAllHashtags(self):
         cursor = self.conn.cursor()
-        query = "select hid,htext,hcount from hashtag;"
+        query = "select * from hashtag;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -35,8 +35,8 @@ class HashtagDAO:
     def getHashtagByText(self, text):
         cursor = self.conn.cursor()
         query = "select * from hashtag " \
-                "where htext = '%s';"
-        cursor.execute(query,(text,))
+                "where htext = '#{}';".format(text)
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
@@ -56,31 +56,25 @@ class HashtagDAO:
     #Inserts a new hashtag
     def insert(self,htext,mid):
         cursor = self.conn.cursor()
-        existingHashtags = self.getAllHashtags()
-        
-        if existingHashtags:
-            for r in existingHashtags:
-                if htext == r[1]:
-                    query = "update hashtag "\
-                            "set hcount = hcount +1 "\
-                            "where htext = %s returning hid;"
-                    cursor.execute(query,(htext,))
-                    hid = cursor.fetchone()[0]
-                    self.conn.commit()
-                    query = "insert into messagehashtag(mid,hid) "\
-                    "values (%s,%s);"
-                    cursor.execute(query,(mid,hid,))
-                    self.conn.commit()
-                    return hid
-        else:
-            query = "insert into hashtag (htext,hcount) "\
-                    "values (%s,%s) returning hid;"
-            cursor.execute(query,(htext,1,))
-            hid = cursor.fetchone()[0]
-            self.conn.commit()
-            query = "insert into messagehashtag(mid,hid) "\
-                    "values (%s,%s);"
-            cursor.execute(query,(mid,hid,))
+        query = "insert into hashtag (htext,hcount) "\
+                "values (%s,%s) returning hid;"
+        cursor.execute(query,(htext,1,))
+        hid = cursor.fetchone()[0]
+        self.conn.commit()
+        query = "insert into messagehashtag(mid,hid) "\
+                "values (%s,%s);"
+        cursor.execute(query,(mid,hid,))
 
-            self.conn.commit()
-            return hid
+        self.conn.commit()
+        return hid
+
+    def getTrending(self):
+        cursor = self.conn.cursor()
+        query = "select h.htext, count(*) as Hits from hashtag as h, messagehashtag as mh, message as m "\
+                "where h.hid = mh.hid and mh.mid = m.mid and m.mtimestamp > current_date - 360"\
+                "group by h.htext order by Hits desc, h.htext asc limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

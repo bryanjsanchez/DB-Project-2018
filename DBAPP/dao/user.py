@@ -41,8 +41,9 @@ class UserDAO:
     #Returns a collection of users composing a contact list.
     def getContactsByID(self, uid):
         cursor = self.conn.cursor()
-        query  = "select U.ufirstname, U.ulastname " \
-                 "from users as U natural inner join contact as C "\
+        query  = "select ufirstname, ulastname " \
+                 "from users as U inner join contact as C on "\
+                 "(U.uid = C.uid) "\
                  "where C.ccontact = %s;"
         cursor.execute(query,(uid,))
         result = []
@@ -73,7 +74,7 @@ class UserDAO:
 
     def newContact(self, uid, firstname, lastname, emailphone):
         cursor = self.conn.cursor()
-        #result = []
+        result = []
         query = "select uid " \
                 "from users " \
                 "where upper(ufirstname) = %s " \
@@ -81,12 +82,24 @@ class UserDAO:
                 "and (upper(uemail) = %s or uphone = %s)"
         cursor.execute(query, (firstname, lastname, emailphone, emailphone))
         contact = cursor.fetchone()[0]
-        print("\n\n\n" + str(contact) + "\n\n\n")
         if contact:
             query = "insert into contact(uid, ccontact) " \
                     "values (%s, %s);"
-            cursor.execute(query, (contact, uid,))
+            cursor.execute(query, (uid, contact))
             self.conn.commit()
+
+
+    def getTopPerDay(self,day):
+        cursor = self.conn.cursor()
+        query = "select uusername, date(mtimestamp)as day , count(*) as count from message natural inner join users where date(mtimestamp) = '{}'"\
+                " group by uusername, day order by  day desc, count desc;".format(day)
+
+        print(query)
+        cursor.execute(query, (day,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
 
 

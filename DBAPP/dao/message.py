@@ -124,5 +124,43 @@ class MessageDAO:
         cursor.execute(query,(uid,mid,mrlike,mrtimestamp,))
         self.conn.commit()
 
+    def getMessagePerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mtimestamp) as Day, count(*) from message group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getRepliesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mtimestamp) as Day, count(*) as Count from message where mrepliedmid !=0 group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
+    def getLikesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mrtimestamp) as Day, count(*) from messagereaction where mrlike = true group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getDislikesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mrtimestamp) as Day, count(*) from messagereaction where mrlike = false group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
     
 
