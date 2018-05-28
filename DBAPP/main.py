@@ -23,17 +23,21 @@ def index():
         return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#        
     else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
 
-@app.route('/ChatApp/login', methods=['GET', 'POST'])
+@app.route('/ChatApp/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':  # Check for Loggin Attempt
-        print("\n\n\n Good Here\n\n\n")        
-        result = UserHandler().login(request.json)
-        if not(result is None):# PassWord Check, insert query here         
+        #session.pop('user', None)
+        #session.pop('id', None)
+        result = UserHandler().login(request.form['username'], request.form['password'])
+        if not(result is None):  # PassWord Check, insert query here
+           # session['user'] = result[0]
+            #session['id'] = result[1]
             global loggedUID
-            loggedUID = result[1]            
-            return jsonify("Logged In")
-        else:
-            return jsonify(Error="Bad login credentials"), 400
+            loggedUID = result[1]
+            #print('\n\n\n' + str(sessionId) + '\n\n\n')
+            return jsonify("Logged In")#redirect(url_for('protected'))
+
+    return render_template('index.html')
 
 @app.route('/protected')
 def protected():
@@ -227,6 +231,35 @@ def getChatbyName(cgid,uid):
 @app.route('/ChatApp/chat/<int:cgid>/members')
 def getChatMembers(cgid):
     return ChatHandler().getChatMembers(cgid)
+
+
+#################################
+####    DASHBOARD ROUTES    #####
+#################################
+
+@app.route('/ChatApp/dash/Trending')
+def getTrendingHash():
+    return HashtagHandler().getTrending()
+
+@app.route('/ChatApp/dash/MessagesPerDay')
+def getMessagesPerDay():
+    return MessageHandler().getMessagePerDay()
+
+@app.route('/ChatApp/dash/RepliesPerDay')
+def getRepliesPerDay():
+    return MessageHandler().getRepliesPerDay()
+
+@app.route('/ChatApp/dash/LikesPerDay')
+def getLikesPerDay():
+    return MessageHandler().getLikesPerDay()
+
+@app.route('/ChatApp/dash/DislikesPerDay')
+def getDislikesPerDay():
+    return MessageHandler().getDislikesPerDay()
+
+@app.route('/ChatApp/dash/TopUsers/<text>')
+def TopUsers(text):
+    return UserHandler().getTopPerDay(text)
 
 
 
