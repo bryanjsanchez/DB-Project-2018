@@ -97,18 +97,27 @@ class UserHandler:
         password = json["password"]
         isactive = "true"
         if firstname!=None and lastname!=None and phone!=None and email!=None and username!=None and password!=None and isactive!=None:
-            dao = UserDAO()
-            uid = dao.insert(firstname,lastname,phone,email,username,password,isactive)
-            result = self.buildUserAttributes(uid,firstname,lastname,phone,email,username,password,isactive)
-            return jsonify(User=result), 201
+            if firstname!="" and lastname!="" and phone!="" and email!="" and username!="" and password!="" and isactive!="":
+                dao = UserDAO()
+                uid = dao.insert(firstname,lastname,phone,email,username,password,isactive)
+                result = self.buildUserAttributes(uid,firstname,lastname,phone,email,username,password,isactive)
+                return jsonify(User=result), 201
+            else:
+               return jsonify(Error="Unexpected attributes in post request"), 400 
+
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
-        return None
+       
     
-    def login(self, username, password):
-        dao = UserDAO()
-        result = dao.login(username, password)
-        return result
+    def login(self, json):
+            username = json["username"]
+            password = json["password"]
+            #print("\n\n\n" + password + "\n\n\n")
+            dao = UserDAO()
+            result = dao.login(username, password)
+            print("\n\n\n Good Here\n\n\n")
+            print("\n\nResult = " + str(result) + "\n\n\n")
+            return result
 
     def newContact(self, form, uid):
         if len(form) != 3:

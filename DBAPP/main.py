@@ -24,22 +24,19 @@ def index():
     # else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
     return render_template('dIndex.html')
 
-@app.route('/ChatApp/login/', methods=['GET', 'POST'])
+@app.route('/ChatApp/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':  # Check for Loggin Attempt
         #session.pop('user', None)
         #session.pop('id', None)
-        result = UserHandler().login(request.form['username'], request.form['password'])
-        if not(result is None):  # PassWord Check, insert query here
-           # session['user'] = result[0]
-            #session['id'] = result[1]
-            global loggedUID
-            loggedUID = result[1]
-            #print('\n\n\n' + str(sessionId) + '\n\n\n')
-            return jsonify("Logged In")#redirect(url_for('protected'))
-
-    return render_template('index.html')
-
+        result = UserHandler().login(request.json)
+        if not(result is None):# PassWord Check, insert query here     
+            global loggedUID   
+            loggedUID = result[1]            
+            return jsonify("Logged In")
+        else:
+           return jsonify(Error="Bad login credentials"), 400 
+           
 @app.route('/protected')
 def protected():
     if g.user:
