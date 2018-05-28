@@ -17,7 +17,13 @@ class HashtagHandler:
         result['hits'] = row[1]
         return result
 
-    
+    def mapHashTagToDict(self,row):
+        result = {}
+        result['hid'] = row[0]
+        result['htext'] = row[1]
+        result['count'] = row[2]
+        return result
+
 
 
     ##### Handlers #####
@@ -27,22 +33,22 @@ class HashtagHandler:
         result = dao.getAllHashtags()
         mapped_result = []
         for r in result:
-            mapped_result.append(self.mapToDict(r))
+            mapped_result.append(self.mapHashTagToDict(r))
         return jsonify(Hashtag=mapped_result)
 
-    def getHashtagByID(self, text):
+    def getHashtagByID(self, hid):
         dao = HashtagDAO()
-        result = dao.getHashtagByID(text)
+        result = dao.getHashtagByID(hid)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        return jsonify(Hashtag=result)
+        return jsonify(Hashtag=self.mapHashTagToDict(result))
 
-    def getHashtagByText(self, hid):
+    def getHashtagByText(self, text):
         dao = HashtagDAO()
-        result = dao.getHashtagByText(hid)
+        result = dao.getHashtagByText(text)
         if result == None:
             return jsonify(Error="Not Found"), 404
-        return jsonify(Hashtag=result)
+        return jsonify(Hashtag=self.mapHashTagToDict(result))
 
     def getTop10Hashtags(self):
         dao = HashtagDAO()

@@ -36,7 +36,7 @@ def login():
             return jsonify("Logged In")
         else:
            return jsonify(Error="Bad login credentials"), 400 
-           
+
 @app.route('/protected')
 def protected():
     if g.user:
@@ -170,7 +170,7 @@ def getUsersThatDislikedMessageByMID(mid):
 def getAllHashtags():
     return HashtagHandler().getAllHashtags()
 
-@app.route('/ChatApp/hashtag/ <int:hid>')
+@app.route('/ChatApp/hashtag/<int:hid>')
 def getHashtagByID(hid):
     return HashtagHandler().getHashtagByID(hid)
 
@@ -222,7 +222,7 @@ def getAllMessagesByChat(cgid):
 def getChatOwner(cgid):
     return ChatHandler().getChatOwner(cgid)
 
-@app.route('/ChatApp/chats/<int:cgid>/user/<int:uid>/messages')
+@app.route('/ChatApp/chat/<int:cgid>/user/<int:uid>/messages')
 def getChatbyName(cgid,uid):
     return ChatHandler().getChatMsgsByUserId(cgid,uid)
 
