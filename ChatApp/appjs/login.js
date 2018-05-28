@@ -1,41 +1,26 @@
-angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$scope','$location','$window',
+angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scope','$location',
     function($http, $log, $scope,$location) {
         var thisCtrl = this;
       
      
 
-        this.firstName = "";
-        this.lastName = "";
-        this.phone = "";
-        this.email = "";
-        this.username = "";
-        this.password = "";
+        this.username ="";
+        this.password ="";
 
-        this.usersList =[];
+       
 
-        this.loadUsers = function(){
-            // Get the messages from the server through the rest api
-            $http.get('http://127.0.0.1:5000/ChatApp/users').then(function(response) {
-                thisCtrl.usersList = response.data.Users;            
-            });
-            $log.error("Users Loaded: ", JSON.stringify(thisCtrl.usersList));
-        };
-
-        this.signUp = function(){
+        
+        this.login = function(){
             
+            var username = thisCtrl.username;
+            var password = thisCtrl.password; 
         
             var data = {};
-            data["firstname"] = thisCtrl.firstName;
-            data["lastname"] = thisCtrl.lastName;
-            data["phone"] = thisCtrl.phone;
-            data["email"] = thisCtrl.email;
-            data["username"] = thisCtrl.username;
-            data["password"] = thisCtrl.password;     
-            
-        
+            data["username"] = username;
+            data["password"] = password;       
 
             
-            var reqURL = "http://localhost:5000/ChatApp/users";
+            var reqURL = "http://localhost:5000/ChatApp/login";
             console.log("reqURL: " + reqURL);
 
             // configuration headers for HTTP request
@@ -52,15 +37,11 @@ angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$sco
                 function (response) {
                     console.log("data: " + JSON.stringify(response.data));
                     // tira un mensaje en un alert
-                    alert("New  user added with id: " + response.data.User.uid);
-                    thisCtrl.firstName = "";
-                    thisCtrl.lastName = "";
-                    thisCtrl.phone = "";
-                    thisCtrl.email = "";
+                                   
                     thisCtrl.username = "";
                     thisCtrl.password = "";
-                    var url = "/login";
-                    $location.url(url);
+
+                    $location.url('/homepage')
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -71,28 +52,36 @@ angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$sco
                     //alert("Cristo");
                     if (status == 0) {
                         alert("No hay conexion a Internet");
+                        $location.url('/login')
                     }
                     else if (status == 401) {
                         alert("Su sesion expiro. Conectese de nuevo.");
+                        $location.url('/login')
                     }
                     else if (status == 403) {
                         alert("No esta autorizado a usar el sistema.");
+                        $location.url('/login')
                     }
                     else if (status == 404) {
                         alert("No se encontro la informacion solicitada.");
+                        $location.url('/login')
                     }
                     else {
                         alert("Error interno del sistema.");
                     }
+
                 }
             );            
             
            
-           
+                
         };
 
-       
+
+        this.signUp = function(){
+            $location.url('/signup');
+        };      
 
         
-        this.loadUsers();
+       
     }]);

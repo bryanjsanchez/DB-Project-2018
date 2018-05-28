@@ -6,7 +6,7 @@
         $routeProvider.when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
-            controllerAs : 'logingCtrl'
+            controllerAs : 'loginCtrl'
         }).when('/signup', {
             templateUrl: 'pages/signup.html',
             controller: 'SignUpController',
@@ -48,7 +48,7 @@
             controller: 'ViewContactsController',
             controllerAs : 'viewContactsCtrl'
         }).otherwise({
-            redirectTo: '/homepage'
+            redirectTo: '/login'
         });
     }]);
 

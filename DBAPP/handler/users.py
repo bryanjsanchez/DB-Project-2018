@@ -98,10 +98,17 @@ class UserHandler:
             return jsonify(Error="Unexpected attributes in post request"), 400
         return None
     
-    def login(self, username, password):
+    def login(self, json):
+        username = json["username"]
+        password = json["password"]
+        print("\n\n\n" + password + "\n\n\n")
         dao = UserDAO()
         result = dao.login(username, password)
+        print("\n\n\n Good Here\n\n\n")
+        print("\n\nResult = " + str(result) + "\n\n\n")
         return result
+      
+
 
     def newContact(self, form, uid):
         if len(form) != 3:
