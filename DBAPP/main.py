@@ -18,10 +18,11 @@ loggedUID = 0
 ########################
 @app.route('/')
 def index():   
-    if 'user' in session:
-        username = session['user']
-        return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#        
-    else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
+    # if 'user' in session:
+    #     username = session['user']
+    #     return 'Logged in as ' + username + '<br>' + "<b><a href = '/logout'>click here to log out</a></b>" # Not Really#
+    # else:  return "You are not logged in <br><a href = '/ChatApp/login'></b>" + "click here to log in</b></a>"
+    return render_template('dIndex.html')
 
 @app.route('/ChatApp/login/', methods=['GET', 'POST'])
 def login():
@@ -172,7 +173,7 @@ def getUsersThatDislikedMessageByMID(mid):
 def getAllHashtags():
     return HashtagHandler().getAllHashtags()
 
-@app.route('/ChatApp/hashtag/<int:hid>')
+@app.route('/ChatApp/hashtag/ <int:hid>')
 def getHashtagByID(hid):
     return HashtagHandler().getHashtagByID(hid)
 
@@ -224,7 +225,7 @@ def getAllMessagesByChat(cgid):
 def getChatOwner(cgid):
     return ChatHandler().getChatOwner(cgid)
 
-@app.route('/ChatApp/chat/<int:cgid>/user/<int:uid>/messages')
+@app.route('/ChatApp/chats/<int:cgid>/user/<int:uid>/messages')
 def getChatbyName(cgid,uid):
     return ChatHandler().getChatMsgsByUserId(cgid,uid)
 
@@ -257,9 +258,9 @@ def getLikesPerDay():
 def getDislikesPerDay():
     return MessageHandler().getDislikesPerDay()
 
-@app.route('/ChatApp/dash/TopUsers/<text>')
-def TopUsers(text):
-    return UserHandler().getTopPerDay(text)
+@app.route('/ChatApp/dash/TopUsers')
+def TopUsers():
+    return UserHandler().getTopPerDay()
 
 
 
