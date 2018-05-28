@@ -8,7 +8,7 @@ class HashtagHandler:
         result = {}
         result['hid'] = row[0]
         result['htext'] = row[1]
-        result['hmessageid'] = row[2]
+        result['hcount'] = row[2]
         return result
 
     
@@ -50,6 +50,7 @@ class HashtagHandler:
         mtext = json["mtext"] 
         mid = json["mid"] 
         hashtags = self.hashes(mtext)
+        oldhashes = self.getAllHashtags()
         dao = HashtagDAO()
         for h in hashtags:
             hid = dao.insert(h,mid)

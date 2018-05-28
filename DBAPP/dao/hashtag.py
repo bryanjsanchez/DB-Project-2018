@@ -15,7 +15,7 @@ class HashtagDAO:
     
     def getAllHashtags(self):
         cursor = self.conn.cursor()
-        query = "select * from hashtag;"
+        query = "select hid,htext,hcount from hashtag;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -35,8 +35,8 @@ class HashtagDAO:
     def getHashtagByText(self, text):
         cursor = self.conn.cursor()
         query = "select * from hashtag " \
-                "where htext = '#{}';".format(text)
-        cursor.execute(query)
+                "where htext = '%s';"
+        cursor.execute(query,(text,))
         result = []
         for row in cursor:
             result.append(row)
@@ -56,14 +56,31 @@ class HashtagDAO:
     #Inserts a new hashtag
     def insert(self,htext,mid):
         cursor = self.conn.cursor()
-        query = "insert into hashtag (htext,hcount) "\
-                "values (%s,%s) returning hid;"
-        cursor.execute(query,(htext,1,))
-        hid = cursor.fetchone()[0]
-        self.conn.commit()
-        query = "insert into messagehashtag(mid,hid) "\
-                "values (%s,%s);"
-        cursor.execute(query,(mid,hid,))
+        existingHashtags = self.getAllHashtags()
+        
+        if existingHashtags:
+            for r in existingHashtags:
+                if htext == r[1]:
+                    query = "update hashtag "\
+                            "set hcount = hcount +1 "\
+                            "where htext = %s returning hid;"
+                    cursor.execute(query,(htext,))
+                    hid = cursor.fetchone()[0]
+                    self.conn.commit()
+                    query = "insert into messagehashtag(mid,hid) "\
+                    "values (%s,%s);"
+                    cursor.execute(query,(mid,hid,))
+                    self.conn.commit()
+                    return hid
+        else:
+            query = "insert into hashtag (htext,hcount) "\
+                    "values (%s,%s) returning hid;"
+            cursor.execute(query,(htext,1,))
+            hid = cursor.fetchone()[0]
+            self.conn.commit()
+            query = "insert into messagehashtag(mid,hid) "\
+                    "values (%s,%s);"
+            cursor.execute(query,(mid,hid,))
 
-        self.conn.commit()
-        return hid
+            self.conn.commit()
+            return hid
