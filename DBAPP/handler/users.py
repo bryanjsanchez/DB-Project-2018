@@ -33,6 +33,13 @@ class UserHandler:
             return mapped_contacts
         else:
             return None
+
+    def mapTop(self, row):
+        result = {}
+        result['uusername'] = row[0]
+        result['day'] = row[1]
+        result['count'] = 2
+        return result
     
     def buildUserAttributes(self,uid,firstname,lastname,phone,email,username,password,isactive):
         result = {}
@@ -98,17 +105,10 @@ class UserHandler:
             return jsonify(Error="Unexpected attributes in post request"), 400
         return None
     
-    def login(self, json):
-        username = json["username"]
-        password = json["password"]
-        print("\n\n\n" + password + "\n\n\n")
+    def login(self, username, password):
         dao = UserDAO()
         result = dao.login(username, password)
-        print("\n\n\n Good Here\n\n\n")
-        print("\n\nResult = " + str(result) + "\n\n\n")
         return result
-      
-
 
     def newContact(self, form, uid):
         if len(form) != 3:
@@ -124,4 +124,17 @@ class UserHandler:
                 return jsonify(Success="Successfully added contact"), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def getTopPerDay(self, day):
+        dao = UserDAO()
+        result = dao.getTopPerDay(day)
+        if result is None:
+            return jsonify(Error="Not Found"), 404
+        else:
+            mapped_result = []
+            for r in result:
+                mapped_result.append(self.mapTop(r))
+            return jsonify(Top_Users=mapped_result)
+
 

@@ -55,6 +55,11 @@ class MessageHandler:
         result['mrtimestamp'] = mrtimestamp
         return result
 
+    def mapMessageDays(self, row):
+        result = {}
+        result['Day'] = row[0]
+        result['Count'] = row[1]
+        return result
     ##### Handlers #####
 
     def getAllMessages(self):
@@ -183,6 +188,35 @@ class MessageHandler:
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400   
 
+    def getMessagePerDay(self):
+        dao = MessageDAO()
+        result = dao.getMessagePerDay()
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapMessageDays(r))
+        return jsonify(Messages_Per_Day=mapped_result)
 
+    def getRepliesPerDay(self):
+        dao = MessageDAO()
+        result = dao.getRepliesPerDay()
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapMessageDays(r))
+        return jsonify(Replies_Per_Day=mapped_result)
 
+    def getLikesPerDay(self):
+        dao = MessageDAO()
+        result = dao.getLikesPerDay()
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapMessageDays(r))
+        return jsonify(Likes_Per_Day=mapped_result)
+
+    def getDislikesPerDay(self):
+        dao = MessageDAO()
+        result = dao.getDislikesPerDay()
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapMessageDays(r))
+        return jsonify(Dislikes_Per_Day=mapped_result)
         

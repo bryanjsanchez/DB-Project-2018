@@ -8,7 +8,13 @@ class HashtagHandler:
         result = {}
         result['hid'] = row[0]
         result['htext'] = row[1]
-        result['hcount'] = row[2]
+        result['hmessageid'] = row[2]
+        return result
+
+    def mapTrend(self, row):
+        result = {}
+        result['hid'] = row[0]
+        result['hits'] = row[1]
         return result
 
     
@@ -50,7 +56,6 @@ class HashtagHandler:
         mtext = json["mtext"] 
         mid = json["mid"] 
         hashtags = self.hashes(mtext)
-        oldhashes = self.getAllHashtags()
         dao = HashtagDAO()
         for h in hashtags:
             hid = dao.insert(h,mid)
@@ -86,6 +91,16 @@ class HashtagHandler:
             else:
                 break
         return hashString
+
+
+
+    def getTrending(self):
+        dao = HashtagDAO()
+        result = dao.getTrending()
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapTrend(r))
+        return jsonify(Trending_Hashtag=mapped_result)
 
 
 
