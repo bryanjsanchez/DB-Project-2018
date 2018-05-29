@@ -6,6 +6,7 @@ class UserHandler:
     #Maps a UserDAO to a dictionary
     def mapToDict(self,row):
         result = {}
+        #print("\n\n\n\n" + row + "\n\n\n\n")
         result['uid'] = row[0]
         result['firstname'] = row[1]
         result['lastname'] = row[2]
@@ -33,6 +34,25 @@ class UserHandler:
         else:
             return None
 
+    def mapTop(self, row):
+        result = {}
+        result['uusername'] = row[0]
+        result['day'] = row[1]
+        result['count'] = row[2]
+        return result
+    
+    def buildUserAttributes(self,uid,firstname,lastname,phone,email,username,password,isactive):
+        result = {}
+        result['uid'] = uid
+        result['firstname'] = firstname
+        result['lastname'] = lastname
+        result['phone'] = phone
+        result['email'] = email
+        result['username'] = username
+        result['password'] = password
+        result['isactive'] = isactive
+        return result
+
 
     ##### Handlers #####
 
@@ -42,7 +62,7 @@ class UserHandler:
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
-        return jsonify(User=mapped_result)
+        return jsonify(Users=mapped_result)
         
     def getUserByID(self,uid):
         dao = UserDAO()
@@ -50,7 +70,7 @@ class UserHandler:
         if not result:
             return jsonify(Error="Not Found"), 404
         else:
-            return jsonify(User=result)
+            return jsonify(User=self.mapToDict(result))
     
     def getUserByUserName(self,username):
         dao = UserDAO()
@@ -58,7 +78,7 @@ class UserHandler:
         if not result:
             return jsonify(Error="Not Found"), 404
         else:
-            return jsonify(User=result)
+            return jsonify(User=self.mapToDict(result))
 
     def getAllContactsByID(self, id):
         result = self.mapContactsToDict(id)
@@ -66,3 +86,65 @@ class UserHandler:
             return jsonify(Error="Not Found"), 404
         else:
             return jsonify(Contacts=result)
+
+
+    def insertUserJson(self,json):
+        firstname = json["firstname"]
+        lastname = json["lastname"]
+        phone = json["phone"]
+        email = json["email"]
+        username = json["username"]
+        password = json["password"]
+        isactive = "true"
+        if firstname!=None and lastname!=None and phone!=None and email!=None and username!=None and password!=None and isactive!=None:
+            if firstname!="" and lastname!="" and phone!="" and email!="" and username!="" and password!="" and isactive!="":
+                dao = UserDAO()
+                uid = dao.insert(firstname,lastname,phone,email,username,password,isactive)
+                result = self.buildUserAttributes(uid,firstname,lastname,phone,email,username,password,isactive)
+                return jsonify(User=result), 201
+            else:
+               return jsonify(Error="Unexpected attributes in post request"), 400 
+
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 400
+       
+    
+    def login(self, json):
+            username = json["username"]
+            password = json["password"]
+            #print("\n\n\n" + password + "\n\n\n")
+            dao = UserDAO()
+            result = dao.login(username, password)
+            print("\n\n\n Good Here\n\n\n")
+            print("\n\nResult = " + str(result) + "\n\n\n")
+            return result
+
+    def newContact(self, form, uid):
+        if len(form) != 3:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            print(form)
+            firstname = form['firstname'].upper()
+            lastname = form['lastname'].upper()
+            emailphone = form['emailphone'].upper()
+            if uid and firstname and lastname and emailphone:
+                dao = UserDAO()
+                dao.newContact(uid, firstname, lastname, emailphone)
+                return jsonify(Success="Successfully added contact"), 200
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def getTopPerDay(self):
+        dao = UserDAO()
+        result = dao.getTopPerDay()
+        print(result)
+        if result is None:
+            return jsonify(Error="Not Found"), 404
+        else:
+            mapped_result = []
+            for r in result:
+                mapped_result.append(self.mapTop(r))
+            return jsonify(Top_Users=mapped_result)
+
+

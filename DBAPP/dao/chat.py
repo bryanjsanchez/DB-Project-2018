@@ -10,26 +10,26 @@ class ChatDAO:
             pg_config['password']
         )
 
-        self.conn = psycopg2._connect(connection_url)
-        
+        self.conn = psycopg2.connect(connection_url)
+
 
     def getAllChatGroups(self):
         cursor = self.conn.cursor()
-        query = "select U.uusername as Owner , CG.cgname, CG.cgid from users as U, chatgroup as CG, ownschat as O "\
+        query = "select U.uusername as Owner , CG.cgname, CG.cgid from users as U, chatgroup as CG, ownschat as O " \
                 "where CG.cgid = O.cgid and O.uid = U.uid"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
-       
+
 
     def getChatMsgsByUserId(self,cgid,uid):
         cursor = self.conn.cursor()
         query = "select cgname,ufirstname,ulastname,mtext " \
-                "from (chatgroup natural inner join chatmember) "\
-                "natural inner join (users natural inner join message) "\
-                "where cgid = %s"\
+                "from (chatgroup natural inner join chatmember) " \
+                "natural inner join (users natural inner join message) " \
+                "where cgid = %s" \
                 "and uid = %s"
         cursor.execute(query,(cgid,uid,))
         result = []
@@ -39,12 +39,12 @@ class ChatDAO:
 
     def getChatByID(self, cgid):
         cursor = self.conn.cursor()
-        query = "select U.uusername as Owner , CG.cgname, CG.cgid from users as U, chatgroup as CG, ownschat as O " \
+        query = "select U.uusername as Owner , CG.cgid, CG.cgname from users as U, chatgroup as CG, ownschat as O " \
                 "where CG.cgid = O.cgid and O.uid = U.uid and CG.cgid = %s;"
         cursor.execute(query,(cgid,))
         result = []
         for row in cursor:
-           result.append(row)
+            result.append(row)
         return result
 
     def getAllMessagesByChat(self, cgid):
@@ -63,13 +63,13 @@ class ChatDAO:
                 "COUNT(NULLIF(messagereaction.mrlike=true, true)) AS dislikes " \
                 "FROM message " \
                 "LEFT JOIN messagereaction " \
-                "USING(mid) "\
+                "USING(mid) " \
                 "NATURAL INNER JOIN chatgroup " \
                 "INNER JOIN users " \
                 "ON users.uid = message.uid " \
                 "WHERE message.cgid = %s " \
                 "GROUP BY message.cgid, message.mid, chatname, firstname, lastname, username " \
-                "ORDER BY message.mtimestamp;"
+                "ORDER BY message.mtimestamp DESC;"
         cursor.execute(query, (cgid,))
         cursor.execute(query, (cgid,))
         result = []
@@ -79,10 +79,26 @@ class ChatDAO:
 
     def getChatGroupsByUserId(self,uid):
         cursor = self.conn.cursor()
-        query = "select cgid,cgname   " \
-                "from (users natural inner join chatmember) "\
-                "natural join chatgroup "\
+        query = "select  cgid, cgname   " \
+                "from (users natural inner join chatmember) " \
+                "natural join chatgroup " \
                 "where uid = %s"
+        cursor.execute(query,(uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+
+        return result
+
+    def getChatsNotJoined(self,uid):
+        cursor = self.conn.cursor()
+        query = "select uusername, cgid, cgname   " \
+                "from chatgroup " \
+                "natural inner join ownschat " \
+                "natural inner join users " \
+                "where cgid not in (" \
+                "select cgid from chatmember where uid = %s" \
+                ");"
         cursor.execute(query,(uid,))
         result = []
         for row in cursor:
@@ -91,8 +107,8 @@ class ChatDAO:
 
     def getChatOwner(self, cgid):
         cursor = self.conn.cursor()
-        query = "select U.uid, U.uusername, CG.cgname "\
-                "from Users as U, chatgroup as CG, ownschat as o "\
+        query = "select U.uid, U.uusername, CG.cgname " \
+                "from Users as U, chatgroup as CG, ownschat as o " \
                 "where o.uid = U.uid and o.cgid = CG.cgid and CG.cgid = %s"
         cursor.execute(query,(cgid,))
         result = []
@@ -102,10 +118,27 @@ class ChatDAO:
 
     def getChatUsers(self, cgid):
         cursor = self.conn.cursor()
-        query = "SELECT U.uid, U.uusername, CG.cgname from Users as U, chatmember as CH, chatgroup as CG "\
+        query = "SELECT U.uid, U.uusername, CG.cgname from Users as U, chatmember as CH, chatgroup as CG " \
                 "where U.uid = CH.uid and CH.cgid = CG.cgid and CG.cgid = %s"
         cursor.execute(query, (cgid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
+
+    def newChat(self, chatname):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO chatgroup(cgname) VALUES (%s) RETURNING cgid;"
+        cursor.execute(query, (chatname,))
+        cgid = cursor.fetchone()[0]
+        query = "INSERT INTO ownschat(cgid, uid) VALUES (%s, 1);"
+        cursor.execute(query, (cgid,))
+        self.conn.commit()
+        return cgid
+
+    def joinChat(self, uid, cgid):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO chatmember(uid, cgid) VALUES (%s, %s);"
+        cursor.execute(query, (uid, cgid))
+        self.conn.commit()
+        return

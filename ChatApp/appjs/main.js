@@ -6,8 +6,16 @@
         $routeProvider.when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
-            controllerAs : 'logingCtrl'
-        }).when('/chat', {
+            controllerAs : 'loginCtrl'
+        }).when('/signup', {
+            templateUrl: 'pages/signup.html',
+            controller: 'SignUpController',
+            controllerAs : 'signupCtrl'
+        }).when('/homepage', {
+            templateUrl: 'pages/homepage.html',
+            controller: 'HPController',
+            controllerAs : 'hpCtrl'
+        }).when('/chat/:cgid', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
@@ -19,8 +27,28 @@
             templateUrl: 'pages/dislikes.html',
             controller: 'DislikesController',
             controllerAs : 'dislikesCtrl'
+        }).when('/message/:mid/reply',{
+            templateUrl: 'pages/reply.html',
+            controller: 'ReplyController',
+            controllerAs : 'replyCtrl'
+        }).when('/newchat',{
+            templateUrl: 'pages/newchat.html',
+            controller: 'NewChatController',
+            controllerAs : 'newChatCtrl'
+        }).when('/addcontact',{
+            templateUrl: 'pages/addcontact.html',
+            controller: 'AddContactController',
+            controllerAs : 'addContactCtrl'
+        }).when('/joinchat',{
+            templateUrl: 'pages/joinchat.html',
+            controller: 'JoinChatController',
+            controllerAs : 'joinChatCtrl'
+        }).when('/viewcontacts',{
+            templateUrl: 'pages/viewcontacts.html',
+            controller: 'ViewContactsController',
+            controllerAs : 'viewContactsCtrl'
         }).otherwise({
-            redirectTo: '/chat'
+            redirectTo: '/login'
         });
     }]);
 

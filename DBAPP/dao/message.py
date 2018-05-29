@@ -10,12 +10,12 @@ class MessageDAO:
             pg_config['password']
         )
 
-        self.conn = psycopg2._connect(connection_url)
+        self.conn = psycopg2.connect(connection_url)
         
 
     def getAllMessages(self):
         cursor = self.conn.cursor()
-        query = "select * from message"
+        query = "select mid,uid,cgid,mtext,mtimestamp,mrepliedmid from message"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -25,12 +25,11 @@ class MessageDAO:
     
     def getMessageByID(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from message " \
-                "where mid = {}".format(mid)
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
+        query = "select mid,uid as mauthor,cgid,mtext,mtimestamp,mrepliedmid "\
+                " from message " \
+                "where mid = %s"
+        cursor.execute(query,(mid,))
+        result = cursor.fetchone()        
         return result
     
     def getAllMessagesByUser(self, uid):
@@ -109,3 +108,59 @@ class MessageDAO:
         return result
         
         
+    def insert(self,uid,cgid,mtext,mtimestamp,mrepliedmid):
+        cursor = self.conn.cursor()
+        query = "insert into message(uid,cgid,mtext,mtimestamp,mrepliedmid) "\
+                "values (%s,%s,%s,%s,%s) returning mid;"
+        cursor.execute(query,(uid,cgid,mtext,mtimestamp,mrepliedmid,))
+        mid = cursor.fetchone()[0]
+        self.conn.commit()
+        return mid
+    
+    def insertLikeDislike(self,uid,mid,mrlike,mrtimestamp):
+        cursor = self.conn.cursor()
+        query = "insert into messagereaction(uid,mid,mrlike,mrtimestamp) "\
+                "values (%s,%s,%s,%s);"
+        cursor.execute(query,(uid,mid,mrlike,mrtimestamp,))
+        self.conn.commit()
+
+    def getMessagePerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mtimestamp) as Day, count(*) from message group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getRepliesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mtimestamp) as Day, count(*) as Count from message where mrepliedmid !=0 group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
+    def getLikesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mrtimestamp) as Day, count(*) from messagereaction where mrlike = true group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getDislikesPerDay(self):
+        cursor = self.conn.cursor()
+        query = "select date(mrtimestamp) as Day, count(*) from messagereaction where mrlike = false group by Day limit 10"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
+    
+

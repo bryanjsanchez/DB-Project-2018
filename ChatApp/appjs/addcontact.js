@@ -1,4 +1,4 @@
-angular.module('AppChat').controller('LikesController', ['$http', '$log', '$scope', '$location', '$routeParams',
+angular.module('AppChat').controller('AddContactController', ['$http', '$log', '$scope', '$location', '$routeParams',
     function($http, $log, $scope, $location, $routeParams) {
         // This variable lets you access this controller
         // from within the callbacks of the $http object
@@ -9,21 +9,22 @@ angular.module('AppChat').controller('LikesController', ['$http', '$log', '$scop
         // as read from the REST API
         var users = {};
 
-        this.loadUsersThatLikedMessage = function(){
+        this.addContact = function(){
             // Get the target part id from the parameter in the url
             // using the $routerParams object
-            var mid = $routeParams.mid;
 
             // Now create the url with the route to talk with the rest API
-            var reqURL = "http://localhost:5000/ChatApp/messages/" + mid + "/likes/users";
+            var reqURL = "http://localhost:5000/ChatApp/user/loggeduser";
             console.log("reqURL: " + reqURL);
             // Now issue the http request to the rest API
-            $http.get(reqURL).then(
+            $http.post(reqURL, {
+                'firstname' : $scope.firstname,
+                'lastname' : $scope.lastname,
+                'emailphone' : $scope.emailphone
+            }).then(
                 // Success function
                 function (response) {
-                    console.log("data: " + JSON.stringify(response.data));
-                    // assing the part details to the variable in the controller
-                    thisCtrl.users = response.data.Users
+                    $location.url('/homepage');
                 }, //Error function
                 function (response) {
                     // This is the error function
@@ -50,7 +51,4 @@ angular.module('AppChat').controller('LikesController', ['$http', '$log', '$scop
                 }
             );
         };
-
-        this.loadUsersThatLikedMessage();
-    }]
-);
+}]);
